@@ -24,6 +24,9 @@
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --gold: #ffd23f;
+    --ai-a: #6d5efc;
+    --ai-b: #00e5ff;
+    --ai-c: #ff3d9a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,9 +43,11 @@
   ::selection { background: var(--white); color: var(--black); }
 
   .progress {
-    position: fixed; top: 0; left: 0; height: 1px; width: 0%;
-    background: var(--white); z-index: 1000;
-    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+    position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--ai-a), var(--ai-b), var(--ai-c));
+    z-index: 1000;
+    box-shadow: 0 0 12px rgba(0,229,255,0.7);
+    transition: width 0.1s linear;
   }
 
   .cursor {
@@ -56,7 +61,6 @@
     border: 1px solid var(--white); mix-blend-mode: difference;
   }
 
-  /* ============ NAV ============ */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     padding: 22px 56px;
@@ -80,7 +84,7 @@
     text-transform: uppercase;
   }
 
-  nav ul { display: flex; gap: 30px; list-style: none; align-items: center; }
+  nav ul { display: flex; gap: 24px; list-style: none; align-items: center; }
   nav a {
     color: var(--white); text-decoration: none;
     font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
@@ -94,8 +98,7 @@
   nav a:hover::after { width: 100%; }
 
   .nav-cta {
-    padding: 9px 18px;
-    border: 1px solid var(--white);
+    padding: 9px 18px; border: 1px solid var(--white);
     font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--white); text-decoration: none;
     transition: background 0.3s, color 0.3s, transform 0.3s var(--spring);
@@ -103,7 +106,6 @@
   .nav-cta:hover { background: var(--white); color: var(--black); transform: scale(1.05); }
   .nav-cta::after { display: none; }
 
-  /* ============ HERO ============ */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
@@ -114,15 +116,15 @@
   }
   .hero-sweep {
     position: absolute;
-    width: 1200px; height: 1200px;
+    width: 1400px; height: 1400px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.06) 25%, transparent 50%, rgba(255,255,255,0.04) 75%, transparent 100%);
+    background: conic-gradient(from 0deg, transparent 0%, rgba(109,94,252,0.12) 20%, transparent 40%, rgba(0,229,255,0.10) 60%, transparent 80%, rgba(255,61,154,0.08) 100%);
     border-radius: 50%;
-    animation: sweep 24s linear infinite;
+    animation: sweep 28s linear infinite;
     pointer-events: none;
-    mask: radial-gradient(circle, transparent 30%, black 55%, transparent 75%);
-    -webkit-mask: radial-gradient(circle, transparent 30%, black 55%, transparent 75%);
+    mask: radial-gradient(circle, transparent 25%, black 50%, transparent 75%);
+    -webkit-mask: radial-gradient(circle, transparent 25%, black 50%, transparent 75%);
   }
   @keyframes sweep { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
@@ -131,13 +133,13 @@
     width: 700px; height: 700px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(109,94,252,0.08) 0%, transparent 60%);
     pointer-events: none;
     animation: glowPulse 7s ease-in-out infinite;
   }
   @keyframes glowPulse {
     0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
   }
 
   .hero-inner { position: relative; z-index: 2; }
@@ -151,25 +153,25 @@
   }
   .kicker .kline {
     height: 1px; width: 0;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4));
+    background: linear-gradient(to right, transparent, rgba(109,94,252,0.7));
     animation: lineGrow 1.2s 0.4s var(--ease-out) forwards;
   }
-  .kicker .kline.r { background: linear-gradient(to left, transparent, rgba(255,255,255,0.4)); }
+  .kicker .kline.r { background: linear-gradient(to left, transparent, rgba(0,229,255,0.7)); }
   @keyframes lineGrow { to { width: 70px; } }
 
   .hero-title {
     font-family: 'Front', sans-serif;
     font-size: clamp(64px, 10vw, 128px);
-    font-weight: 900;
-    letter-spacing: 0.01em;
-    line-height: 1;
+    font-weight: 900; letter-spacing: 0.01em; line-height: 1;
     display: flex; justify-content: center;
-    margin-bottom: 18px;
-    padding-bottom: 6px;
+    margin-bottom: 18px; padding-bottom: 6px;
   }
   .hero-title .letter {
     display: inline-block;
     opacity: 0;
+    background: linear-gradient(180deg, #fff 0%, #fff 60%, rgba(255,255,255,0.55) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
     transform: translateY(110%) rotateX(-60deg);
     animation: letterRise 1s var(--ease-out) forwards;
   }
@@ -193,14 +195,14 @@
 
   .hero-divider {
     width: 0; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(to right, transparent, var(--ai-b), transparent);
     margin: 0 auto 26px;
     animation: dividerGrow 1.4s 1.1s var(--ease-out) forwards;
   }
   @keyframes dividerGrow { to { width: 220px; } }
 
   .hero-desc {
-    max-width: 460px; margin: 0 auto;
+    max-width: 480px; margin: 0 auto;
     font-size: 13px; line-height: 1.8;
     color: var(--dim); font-weight: 300;
     opacity: 0; transform: translateY(20px);
@@ -229,7 +231,6 @@
     100% { transform: scaleY(1); opacity: 0; }
   }
 
-  /* ============ SPOTLIGHT ============ */
   .spotlight {
     position: relative; height: 86vh; min-height: 600px;
     overflow: hidden; margin: 0 56px 40px;
@@ -251,6 +252,71 @@
     background: linear-gradient(90deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.05) 75%);
     z-index: 2;
   }
+
+  .slide.ai { background: radial-gradient(circle at 30% 30%, #1a0a2e 0%, #000 70%); }
+  .slide.ai::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(109,94,252,0.5), transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(0,229,255,0.35), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(255,61,154,0.3), transparent 40%);
+    animation: aiPulse 8s ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes aiPulse {
+    0%,100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  .slide.ai .ai-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(109,94,252,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(109,94,252,0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+    z-index: 1;
+    mask: radial-gradient(circle at 50% 50%, black 20%, transparent 70%);
+    -webkit-mask: radial-gradient(circle at 50% 50%, black 20%, transparent 70%);
+  }
+  @keyframes gridMove { to { background-position: 40px 40px; } }
+  .slide.ai .ai-orb {
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--ai-b), var(--ai-a) 50%, transparent 75%);
+    filter: blur(60px);
+    top: 20%; right: 15%;
+    animation: orbFloat 10s ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes orbFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-30px, 30px) scale(1.15); }
+  }
+
+  .slide.sports { background: #0a0505; }
+  .slide.sports img { filter: brightness(0.65) contrast(1.15) saturate(1.2); }
+  .slide.sports::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0, transparent 60px, rgba(255,60,60,0.04) 60px, rgba(255,60,60,0.04) 61px),
+      radial-gradient(circle at 80% 30%, rgba(255,60,60,0.25), transparent 50%);
+    z-index: 1;
+    animation: sportsPulse 4s ease-in-out infinite;
+  }
+  @keyframes sportsPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .slide.sports .sports-stripe {
+    position: absolute; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, #ff3d3d, transparent);
+    top: 30%;
+    animation: stripeRun 6s ease-in-out infinite;
+    z-index: 1; box-shadow: 0 0 20px rgba(255,61,61,0.6);
+  }
+  @keyframes stripeRun {
+    0%,100% { top: 20%; opacity: 0; }
+    50% { top: 70%; opacity: 1; }
+  }
+
   .slide-content {
     position: absolute; left: 64px; bottom: 64px;
     max-width: 540px; z-index: 3; text-align: left;
@@ -272,6 +338,8 @@
     background: var(--white); color: var(--black);
     font-weight: 800; margin-bottom: 18px; border-radius: 2px;
   }
+  .slide-content .tag.ai-tag { background: linear-gradient(90deg, var(--ai-a), var(--ai-b)); color: #000; }
+  .slide-content .tag.sports-tag { background: #ff3d3d; color: #fff; }
   .slide-content h2 {
     font-family: 'Front', sans-serif;
     font-size: clamp(36px, 5vw, 72px);
@@ -296,6 +364,7 @@
     padding: 13px 24px; background: var(--white); color: var(--black);
     font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
     font-weight: 700; border: none; cursor: pointer;
+    text-decoration: none;
     transition: transform 0.3s var(--spring), box-shadow 0.3s;
   }
   .slide-content .cta:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(255,255,255,0.2); }
@@ -304,24 +373,20 @@
     position: absolute; bottom: 0; left: 0; right: 0;
     height: 2px; background: rgba(255,255,255,0.08); z-index: 5;
   }
-  .slide-progress-bar { height: 100%; background: var(--white); width: 0%; transition: width 0.1s linear; }
-
-  .slide-nav { position: absolute; right: 56px; bottom: 64px; display: flex; gap: 10px; z-index: 4; }
-  .slide-dot {
-    width: 36px; height: 3px; background: rgba(255,255,255,0.25);
-    border: none; cursor: pointer; padding: 0;
-    transition: background 0.3s, width 0.3s var(--spring);
+  .slide-progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--ai-a), var(--ai-b));
+    transition: width 0.1s linear;
   }
-  .slide-dot.active { background: var(--white); width: 56px; }
 
-  .slide-arrows {
-    position: absolute; right: 56px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 12px; z-index: 4;
+  .slide-arrows-group {
+    position: absolute; right: 56px; bottom: 64px;
+    display: flex; gap: 8px; z-index: 6;
   }
   .arrow {
     width: 46px; height: 46px;
     border: 1px solid rgba(255,255,255,0.35);
-    background: rgba(0,0,0,0.4); color: var(--white);
+    background: rgba(0,0,0,0.5); color: var(--white);
     font-size: 15px; cursor: pointer;
     backdrop-filter: blur(10px);
     transition: background 0.3s, color 0.3s, transform 0.3s var(--spring);
@@ -329,11 +394,10 @@
   }
   .arrow:hover { background: var(--white); color: var(--black); border-color: var(--white); transform: scale(1.1); }
 
-  /* ============ SECTION ============ */
   section { padding: 100px 56px; max-width: 1700px; margin: 0 auto; }
 
   .section-head {
-    display: grid; grid-template-columns: auto 1fr auto;
+    display: grid; grid-template-columns: auto 1fr auto auto;
     align-items: baseline; gap: 28px;
     margin-bottom: 44px; padding-bottom: 22px;
     border-bottom: 1px solid var(--line);
@@ -356,11 +420,27 @@
     opacity: 0; transform: translateY(10px);
     transition: opacity 0.7s 0.2s var(--ease-out), transform 0.7s 0.2s var(--ease-out);
   }
+  .section-head .view-all {
+    font-family: 'Front', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 100px;
+    cursor: pointer; background: transparent;
+    transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s var(--spring), opacity 0.7s 0.3s var(--ease-out);
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 600; opacity: 0;
+  }
+  .section-head .view-all:hover {
+    background: var(--white); color: var(--black); border-color: var(--white);
+    transform: scale(1.03);
+  }
   .section-head.in-view .index { opacity: 1; transform: translateY(0); }
   .section-head.in-view h2 { clip-path: inset(0 0 0 0); }
   .section-head.in-view .count { opacity: 1; transform: translateY(0); }
+  .section-head.in-view .view-all { opacity: 1; }
 
-  /* ============ RAIL ============ */
   .rail-wrap { position: relative; margin: 0 -56px; padding: 0 56px; overflow: hidden; }
   .rail {
     display: flex; gap: 20px;
@@ -385,7 +465,6 @@
   .rail-btn.prev { left: 8px; }
   .rail-btn.next { right: 8px; }
 
-  /* ============ GRID / CARD ============ */
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
 
   .card {
@@ -453,6 +532,14 @@
     background: rgba(0,0,0,0.55); color: var(--white);
     border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(10px);
   }
+  .badge.live-badge {
+    background: #ff3d3d; color: var(--white); border: none;
+    animation: livePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,61,61,0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(255,61,61,0); }
+  }
 
   .rating-tag {
     position: absolute; top: 14px; right: 14px; padding: 5px 9px;
@@ -510,7 +597,16 @@
   .lang { display: inline-flex; gap: 5px; font-size: 8px; color: #a0a0a0; margin-top: 6px; letter-spacing: 1.5px; text-transform: uppercase; }
   .lang .dot { width: 3px; height: 3px; border-radius: 50%; background: #a0a0a0; align-self: center; }
 
-  /* ============ COMING SOON ============ */
+  .expand-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px; margin-top: 0; max-height: 0;
+    overflow: hidden; opacity: 0;
+    transition: max-height 1s var(--ease-out), opacity 0.6s var(--ease-out), margin 0.6s;
+  }
+  .expand-grid.open { max-height: 8000px; opacity: 1; margin-top: 34px; }
+  .expand-grid .card { opacity: 1; transform: none; transition: border-color 0.4s, box-shadow 0.5s, transform 0.4s var(--ease-out); }
+
   .soon-banner {
     display: grid; grid-template-columns: 1fr 1fr;
     margin-bottom: 44px; border: 1px solid var(--line);
@@ -555,26 +651,77 @@
   .cd-block .num { font-family: 'Front', sans-serif; font-size: 22px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .cd-block .lbl { font-size: 8px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-top: 4px; }
 
-  /* ============ FOOTER ============ */
   footer {
-    padding: 90px 56px 44px; border-top: 1px solid var(--line);
+    padding: 100px 56px 44px;
+    border-top: 1px solid var(--line);
     margin-top: 70px; max-width: 1700px;
-    margin-left: auto; margin-right: auto; text-align: center;
+    margin-left: auto; margin-right: auto;
   }
+  .contact-section {
+    text-align: center; padding-bottom: 70px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 50px;
+  }
+  .contact-section .c-kicker {
+    font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--dim); font-weight: 500; margin-bottom: 16px;
+  }
+  .contact-section h4 {
+    font-family: 'Front', sans-serif;
+    font-size: clamp(28px, 4vw, 56px);
+    font-weight: 800; letter-spacing: -0.02em; margin-bottom: 40px;
+  }
+  .contact-section h4 .grad {
+    background: linear-gradient(90deg, var(--ai-a), var(--ai-b), var(--ai-c));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; max-width: 940px; margin: 0 auto;
+  }
+  .contact-card {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 24px 20px; background: #080808;
+    border: 1px solid var(--line); border-radius: 4px;
+    text-decoration: none; color: var(--white);
+    transition: border-color 0.3s, transform 0.4s var(--spring), background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .contact-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(109,94,252,0.05), transparent);
+    opacity: 0; transition: opacity 0.4s; z-index: 0;
+  }
+  .contact-card:hover::before { opacity: 1; }
+  .contact-card:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-4px); background: #0f0f0f; }
+  .contact-card > * { position: relative; z-index: 1; }
+  .contact-card .cc-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dim); font-weight: 600;
+  }
+  .contact-card .cc-value {
+    font-family: 'Front', sans-serif;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.5px;
+    word-break: break-all;
+  }
+  .contact-card .cc-arrow {
+    font-size: 12px; color: var(--dim);
+    margin-top: auto; padding-top: 8px;
+    transition: transform 0.3s var(--spring), color 0.3s;
+  }
+  .contact-card:hover .cc-arrow { transform: translateX(4px); color: var(--white); }
+
   footer .big {
     font-family: 'Front', sans-serif;
     font-size: clamp(56px, 8vw, 120px);
     font-weight: 900; letter-spacing: 0.01em; line-height: 1;
-    margin-bottom: 14px;
+    margin-bottom: 14px; text-align: center;
   }
-  footer .tag-line { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--dim); margin-bottom: 34px; }
-  footer .created {
-    display: inline-flex; align-items: center; gap: 14px;
-    font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-    color: var(--dim); font-weight: 500; margin-bottom: 34px;
+  footer .tag-line {
+    font-size: 10px; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 30px; text-align: center;
   }
-  footer .created .cline { height: 1px; width: 40px; background: rgba(255,255,255,0.2); }
-  footer .created span { color: var(--white); font-weight: 700; }
   footer .foot-row {
     display: flex; justify-content: space-between; align-items: center;
     padding-top: 24px; border-top: 1px solid var(--line);
@@ -582,6 +729,9 @@
     color: var(--dim); font-weight: 500; flex-wrap: wrap; gap: 14px;
   }
   footer .foot-row span { color: var(--white); }
+  footer .foot-row .fl { display: flex; gap: 20px; }
+  footer .foot-row .fl a { color: var(--dim); text-decoration: none; transition: color 0.3s; }
+  footer .foot-row .fl a:hover { color: var(--white); }
 
   /* ============ MODAL ============ */
   .modal-backdrop {
@@ -622,149 +772,75 @@
   .modal-scroll::-webkit-scrollbar { width: 6px; }
   .modal-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
 
-  /* ============ PLAYER ============ */
-  .modal-player {
-    position: relative;
-    background: #000;
-    border-bottom: 1px solid var(--line);
-  }
-  .modal-trailer {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #000;
-  }
-  .modal-trailer #ytPlayer,
-  .modal-trailer iframe {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; border: none;
-  }
+  .modal-player { position: relative; background: #000; border-bottom: 1px solid var(--line); }
+  .modal-trailer { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+  .modal-trailer #ytPlayer, .modal-trailer iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 
-  /* custom control bar */
   .player-controls {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
-    background: #050505;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+    padding: 12px 16px; background: #050505;
     border-top: 1px solid rgba(255,255,255,0.08);
-    font-family: 'Front', 'Inter', sans-serif;
   }
-
   .pc-play {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.35);
-    background: var(--white);
-    color: var(--black);
-    font-size: 15px;
-    cursor: pointer;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: none; background: var(--white); color: var(--black);
+    font-size: 14px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: transform 0.25s var(--spring), background 0.25s;
-    flex: 0 0 auto;
-    font-weight: 700;
+    transition: transform 0.25s var(--spring);
+    flex: 0 0 auto; font-weight: 700;
   }
-  .pc-play:hover { transform: scale(1.08); background: var(--white); }
+  .pc-play:hover { transform: scale(1.08); }
 
-  .pc-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 0 0 auto;
-  }
+  .pc-group { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
   .pc-group .pc-label {
-    font-size: 8px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--dim);
-    font-weight: 600;
-    margin-right: 2px;
+    font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dim); font-weight: 600; margin-right: 2px;
   }
 
   .pc-select {
-    appearance: none;
-    -webkit-appearance: none;
-    background: #111;
-    border: 1px solid rgba(255,255,255,0.18);
-    color: var(--white);
-    padding: 8px 26px 8px 12px;
-    font-family: inherit;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    outline: none;
+    appearance: none; -webkit-appearance: none;
+    background: #111; border: 1px solid rgba(255,255,255,0.18);
+    color: var(--white); padding: 8px 26px 8px 12px;
+    font-family: inherit; font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; border-radius: 2px;
+    cursor: pointer; outline: none;
     transition: border-color 0.25s, background 0.25s;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23ffffff' d='M0 0l5 6 5-6H0z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 8px;
+    background-repeat: no-repeat; background-position: right 10px center; background-size: 8px;
   }
   .pc-select:hover { border-color: rgba(255,255,255,0.4); background-color: #161616; }
-  .pc-select:focus { border-color: var(--white); }
   .pc-select option { background: #111; color: var(--white); }
 
-  /* speed cluster */
   .pc-speed {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: #111;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 2px;
-    padding: 3px;
+    display: flex; align-items: center; gap: 4px;
+    background: #111; border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 2px; padding: 3px;
   }
   .pc-speed button {
     width: 28px; height: 28px;
-    border: none;
-    background: transparent;
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
+    border: none; background: transparent; color: var(--white);
+    font-size: 14px; font-weight: 700; cursor: pointer;
     border-radius: 2px;
     display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s, color 0.2s;
-    font-family: inherit;
+    transition: background 0.2s; font-family: inherit;
   }
   .pc-speed button:hover:not(:disabled) { background: rgba(255,255,255,0.1); }
   .pc-speed button:disabled { opacity: 0.3; cursor: not-allowed; }
   .pc-speed .pc-speed-val {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    color: var(--white);
-    font-weight: 700;
-    min-width: 46px;
-    text-align: center;
+    font-size: 10px; letter-spacing: 1.5px; color: var(--white);
+    font-weight: 700; min-width: 46px; text-align: center;
     font-variant-numeric: tabular-nums;
   }
 
-  .pc-live-dot {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: auto;
-    font-size: 8px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--dim);
-    font-weight: 600;
+  .pc-direct {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; background: #ff0000; color: #fff;
+    text-decoration: none; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 800; border-radius: 2px;
+    transition: transform 0.25s var(--spring), background 0.25s;
   }
-  .pc-live-dot::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #ff3b30;
-    animation: livePulse 1.6s ease-in-out infinite;
-  }
-  @keyframes livePulse {
-    0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,59,48,0.6); }
-    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(255,59,48,0); }
-  }
+  .pc-direct:hover { transform: scale(1.04); background: #d90000; }
 
-  /* ============ MODAL BODY ============ */
   .modal-body { padding: 40px 44px 44px; }
   .modal-body .modal-cat { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; font-weight: 500; }
   .modal-body h2 {
@@ -772,7 +848,6 @@
     font-size: clamp(28px, 3.5vw, 48px);
     font-weight: 900; line-height: 1; letter-spacing: -0.03em; margin-bottom: 20px;
   }
-
   .modal-meta {
     display: flex; gap: 22px; flex-wrap: wrap;
     padding: 18px 0; border-top: 1px solid var(--line);
@@ -788,6 +863,104 @@
   .modal-story-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; font-weight: 600; }
   .modal-story { font-size: 14px; line-height: 1.8; color: #d8d8d8; font-weight: 300; margin-bottom: 26px; max-width: 780px; }
 
+  /* ============ CAST WITH FACES ============ */
+  .cast-section {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cast-section:last-of-type { border-bottom: none; }
+  .cast-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cast-label .cs-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: linear-gradient(90deg, var(--ai-a), var(--ai-b));
+  }
+
+  .cast-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .cast-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px 10px 10px;
+    background: #0f0f12;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    font-size: 11px;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s var(--spring);
+  }
+  .cast-item:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: #16161b;
+    transform: translateY(-2px);
+  }
+
+  /* the face */
+  .ci-face {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex: 0 0 auto;
+    background: linear-gradient(135deg, var(--ai-a), var(--ai-b));
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .ci-face img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    filter: contrast(1.05);
+    transition: transform 0.5s var(--ease-out);
+  }
+  .cast-item:hover .ci-face img { transform: scale(1.1); }
+  .ci-face .ci-initials {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Front', sans-serif;
+    font-size: 14px; font-weight: 800;
+    color: #000;
+    letter-spacing: 0.5px;
+    z-index: 0;
+  }
+  .ci-face img { position: relative; z-index: 1; }
+
+  .ci-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .ci-actor {
+    font-weight: 700; color: var(--white);
+    font-size: 12px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ci-role {
+    font-size: 10px; color: var(--dim);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .chars-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .char-chip {
+    padding: 6px 12px;
+    font-size: 10px;
+    background: rgba(109,94,252,0.08);
+    border: 1px solid rgba(109,94,252,0.3);
+    border-radius: 100px;
+    color: #d0ccff;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s var(--spring);
+  }
+  .char-chip:hover {
+    background: rgba(109,94,252,0.18);
+    border-color: rgba(109,94,252,0.6);
+    transform: translateY(-2px);
+  }
+  .char-chip .cn { color: var(--white); font-weight: 700; }
+  .char-chip .ca { color: var(--dim); }
+
   .modal-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
   .modal-tags .tg {
     padding: 6px 14px; font-size: 9px; letter-spacing: 2px;
@@ -802,49 +975,56 @@
     cursor: pointer; border-radius: 2px;
     transition: transform 0.3s var(--spring), background 0.3s, border-color 0.3s;
     display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
   }
-  .modal-actions .btn.primary { background: var(--white); color: var(--black); border: 1px solid var(--white); }
-  .modal-actions .btn.primary:hover { transform: translateX(4px); }
+  .modal-actions .btn.primary { background: #ff0000; color: #fff; border: 1px solid #ff0000; }
+  .modal-actions .btn.primary:hover { transform: translateX(4px); background: #d90000; border-color: #d90000; }
   .modal-actions .btn.secondary { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.35); }
   .modal-actions .btn.secondary:hover { background: rgba(255,255,255,0.08); border-color: var(--white); }
 
-  /* ============ RESPONSIVE ============ */
-  @media (max-width: 1400px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 1400px) { .grid, .expand-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 1024px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
+    .grid, .expand-grid { grid-template-columns: repeat(2, 1fr); }
     nav { padding: 18px 28px; }
     .hero { padding: 90px 28px 70px; }
     section { padding: 76px 28px; }
     .spotlight { margin: 0 28px 20px; }
     .slide-content { left: 32px; bottom: 32px; }
-    .slide-nav { right: 32px; bottom: 32px; }
-    .slide-arrows { right: 24px; }
+    .slide-arrows-group { right: 28px; bottom: 28px; }
     .rail-wrap { margin: 0 -28px; padding: 0 28px; }
     footer { padding: 76px 28px 32px; }
-    nav ul { gap: 20px; }
+    nav ul { gap: 16px; }
     .soon-banner { grid-template-columns: 1fr; }
     .soon-banner .content-side { padding: 30px; }
     .modal-body { padding: 30px 26px 34px; }
     .modal-backdrop { padding: 16px 10px; }
     .player-controls { gap: 10px; padding: 12px 14px; }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .section-head { grid-template-columns: auto 1fr auto; }
+    .section-head .view-all { grid-column: 1 / -1; justify-self: flex-end; margin-top: 6px; }
+    .cast-list { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
   }
   @media (max-width: 720px) {
     nav ul { display: none; }
-    .grid { grid-template-columns: 1fr; gap: 16px; }
+    .grid, .expand-grid { grid-template-columns: 1fr; gap: 16px; }
     .section-head { grid-template-columns: 1fr; gap: 10px; }
     .hero-title { font-size: clamp(52px, 15vw, 88px); }
     .hero-desc { font-size: 12px; }
     .info .desc { opacity: 1; max-height: 80px; }
     .info { transform: translateY(0); }
     .spotlight { height: 70vh; min-height: 480px; }
-    .slide-arrows { display: none; }
     .rail .card { flex: 0 0 250px; }
     .logo { font-size: 12px; letter-spacing: 4px; }
     .logo small { font-size: 6.5px; letter-spacing: 2px; }
     .modal-body { padding: 22px 18px 26px; }
     .play-btn { opacity: 1; transform: translate(-50%, -50%) scale(0.85); width: 50px; height: 50px; font-size: 17px; }
-    .pc-live-dot { margin-left: 0; width: 100%; }
     .pc-group .pc-label { display: none; }
+    .pc-direct { margin-left: 0; width: 100%; justify-content: center; }
+    .slide-arrows-group { right: 16px; bottom: 16px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    footer .foot-row { flex-direction: column; text-align: center; }
+    .cast-list { grid-template-columns: 1fr 1fr; }
+    .ci-face { width: 38px; height: 38px; }
   }
 </style>
 </head>
@@ -860,63 +1040,72 @@
     <li><a href="#games">Games</a></li>
     <li><a href="#movies">Movies</a></li>
     <li><a href="#anime">Anime</a></li>
+    <li><a href="#sports">Sports</a></li>
     <li><a href="#coming">Coming Soon</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#spotlight" class="nav-cta">Explore</a>
 </nav>
 
-<!-- ============ HERO ============ -->
 <header class="hero">
   <div class="hero-sweep"></div>
   <div class="hero-glow"></div>
-
   <div class="hero-inner">
     <div class="kicker">
       <span class="kline"></span>
       <span>Created by Sukuna</span>
       <span class="kline r"></span>
     </div>
-
     <h1 class="hero-title">
       <span class="letter">S</span><span class="letter">U</span><span class="letter">K</span><span class="letter">U</span><span class="letter">N</span><span class="letter">A</span>
     </h1>
-
     <div class="hero-tagline">
       <span class="g">Movies</span><span class="dot">·</span><span class="g">Anime</span> & <span class="g">Games Hub</span>
     </div>
-
     <div class="hero-divider"></div>
-
     <p class="hero-desc">
-      Every game. Every film. Every episode. Steam, Xbox, PlayStation, PC, Netflix, Prime, Apple TV, Crunchyroll — one hub, all languages, zero noise.
+      Every game. Every film. Every episode. Every match. Steam, Xbox, PlayStation, PC, Netflix, Prime, Apple TV, Crunchyroll — one hub, all languages, zero noise.
     </p>
   </div>
-
-  <div class="scroll-indicator">
-    <div class="mline"></div>
-    <span>Scroll</span>
-  </div>
+  <div class="scroll-indicator"><div class="mline"></div><span>Scroll</span></div>
 </header>
 
-<!-- ============ SPOTLIGHT ============ -->
 <div id="spotlight" style="padding: 0 0 70px;">
   <div class="spotlight">
     <div class="spotlight-track" id="spotlightTrack">
-
       <div class="slide active">
-        <img src="https://i.ytimg.com/vi/QdBZY2fkU-0/maxresdefault.jpg" alt="Grand Theft Auto VI" loading="eager"
+        <img src="https://i.ytimg.com/vi/QdBZY2fkU-0/maxresdefault.jpg" alt="GTA VI" loading="eager"
              onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/QdBZY2fkU-0/hqdefault.jpg'">
         <div class="slide-content">
           <span class="tag">Most Anticipated · Nov 19, 2026</span>
           <h2>Grand Theft Auto VI</h2>
-          <p class="story">Vice City returns — neon-drenched, sun-bleached, and more alive than ever. Lucia and her partner carve a path through the state of Leonida, where every deal has a body count and every sunset hides a debt coming due.</p>
-          <div class="meta-line">
-            <span class="rating">9.8</span>
-            <span>Rockstar Games</span>
-            <span>Nov 19, 2026 · 12:00 AM</span>
-            <span>PC · PS5 · Xbox</span>
-          </div>
+          <p class="story">Vice City returns — neon-drenched, sun-bleached, and more alive than ever. Lucia and her partner carve a path through the state of Leonida, where every deal has a body count.</p>
+          <div class="meta-line"><span class="rating">9.8</span><span>Rockstar Games</span><span>Nov 19, 2026</span><span>PC · PS5 · Xbox</span></div>
           <button class="cta" data-open="gta6">Watch Trailer →</button>
+        </div>
+      </div>
+
+      <div class="slide ai">
+        <div class="ai-grid"></div>
+        <div class="ai-orb"></div>
+        <div class="slide-content">
+          <span class="tag ai-tag">AI-First · 2026</span>
+          <h2>The AI Era</h2>
+          <p class="story">Machine intelligence is rewriting how games are built, how films are cut, and how stories get told. From generative worlds to real-time direction — the tools changed overnight. The creators followed.</p>
+          <div class="meta-line"><span class="rating">9.7</span><span>Sukuna AI Lab</span><span>2026</span><span>All Platforms</span></div>
+          <button class="cta" data-open="ai">Explore AI →</button>
+        </div>
+      </div>
+
+      <div class="slide sports">
+        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1920&h=1080&fit=crop&q=85" alt="Sports" loading="lazy">
+        <div class="sports-stripe"></div>
+        <div class="slide-content">
+          <span class="tag sports-tag">Live · Sports</span>
+          <h2>The Arena Never Sleeps</h2>
+          <p class="story">Football, cricket, basketball, F1, MMA — every match that matters, every night. Real-time scores, live streams, analysis. Sports is not a section anymore. It's a season.</p>
+          <div class="meta-line"><span class="rating">9.4</span><span>Sukuna Sports</span><span>Live · 24/7</span><span>Global</span></div>
+          <button class="cta" data-open="sports-hub">Enter Sports →</button>
         </div>
       </div>
 
@@ -926,29 +1115,8 @@
           <span class="tag">Epic Cinema · Drama</span>
           <h2>Oppenheimer</h2>
           <p class="story">The bomb, the man, the silence after. Nolan's three-hour detonation — now streaming in every language. The world forever changes.</p>
-          <div class="meta-line">
-            <span class="rating">8.0</span>
-            <span>Christopher Nolan</span>
-            <span>July 19, 2023</span>
-            <span>Netflix · Prime</span>
-          </div>
+          <div class="meta-line"><span class="rating">8.0</span><span>Christopher Nolan</span><span>July 19, 2023</span><span>Netflix · Prime</span></div>
           <button class="cta" data-open="oppenheimer">Watch Trailer →</button>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_hero.jpg" alt="Cyberpunk" loading="lazy">
-        <div class="slide-content">
-          <span class="tag">Trending · RPG</span>
-          <h2>Cyberpunk 2077: Orion</h2>
-          <p class="story">Night City rebuilt — deeper districts, dynamic factions, a story that bleeds neon. V's ghost lingers in every alley, and the sequel everyone wanted is finally on the horizon.</p>
-          <div class="meta-line">
-            <span class="rating">9.1</span>
-            <span>CD Projekt Red</span>
-            <span>2027</span>
-            <span>PC · PS5 · Xbox</span>
-          </div>
-          <button class="cta" data-open="cyberpunk">Watch Trailer →</button>
         </div>
       </div>
 
@@ -958,41 +1126,31 @@
           <span class="tag">Trending Anime</span>
           <h2>Demon Slayer: Infinity Castle</h2>
           <p class="story">The final arc reaches the screen. Tanjiro, Zenitsu, Inosuke — the last stand against Muzan's upper moons inside a castle that bends time and breath.</p>
-          <div class="meta-line">
-            <span class="rating">9.5</span>
-            <span>Ufotable</span>
-            <span>Sept 12, 2025</span>
-            <span>Crunchyroll</span>
-          </div>
+          <div class="meta-line"><span class="rating">9.5</span><span>Ufotable</span><span>Sept 12, 2025</span><span>Crunchyroll</span></div>
           <button class="cta" data-open="demonslayer">Watch Trailer →</button>
         </div>
       </div>
-
     </div>
 
     <div class="slide-progress"><div class="slide-progress-bar" id="slideProgress"></div></div>
-
-    <div class="slide-arrows">
-      <button class="arrow" id="prevSlide">←</button>
-      <button class="arrow" id="nextSlide">→</button>
+    <div class="slide-arrows-group">
+      <button class="arrow" id="prevSlide" aria-label="Previous">←</button>
+      <button class="arrow" id="nextSlide" aria-label="Next">→</button>
     </div>
-    <div class="slide-nav" id="slideNav"></div>
   </div>
 </div>
 
-<!-- ============ GAMES ============ -->
 <section id="games">
   <div class="section-head">
     <span class="index">01</span>
     <h2>GAMES</h2>
     <span class="count">Steam · Epic · Xbox · PS · PC</span>
+    <button class="view-all" data-expand="gamesExpand">View All +</button>
   </div>
-
   <div class="rail-wrap">
     <button class="rail-btn prev" data-rail="gamesRail">←</button>
     <button class="rail-btn next" data-rail="gamesRail">→</button>
     <div class="rail" id="gamesRail">
-
       <article class="card" data-open="gta6">
         <div class="thumb">
           <div class="thumb-fallback">GTA VI</div>
@@ -1007,9 +1165,9 @@
         <div class="info">
           <div class="cat">Game · Open World</div>
           <h3>Grand Theft Auto VI</h3>
-          <p class="desc">Vice City, reborn. Lucia and her partner tear through Leonida — sun, sin, every debt paid in blood.</p>
+          <p class="desc">Vice City, reborn. Lucia and her partner tear through Leonida.</p>
           <div class="row"><span class="date">Nov 19, 2026</span><span>Rockstar</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
         </div>
       </article>
 
@@ -1021,14 +1179,14 @@
           <span class="platform-tag">Epic · PC</span>
           <span class="rank">02</span>
           <div class="play-btn">▶</div>
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900.jpg" alt="Cyberpunk 2077" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900.jpg" alt="Cyberpunk" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="info">
           <div class="cat">Game · RPG</div>
           <h3>Cyberpunk 2077: Orion</h3>
           <p class="desc">Night City rebuilt — deeper districts, dynamic factions, a story that bleeds neon.</p>
           <div class="row"><span class="date">2027</span><span>CD Projekt</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
         </div>
       </article>
 
@@ -1047,7 +1205,7 @@
           <h3>Elden Ring: Nightreign</h3>
           <p class="desc">Three-night runs, shifting bosses, a Lands Between that bends beneath you.</p>
           <div class="row"><span class="date">2025</span><span>FromSoftware</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>JP</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>JP</span></div>
         </div>
       </article>
 
@@ -1059,14 +1217,14 @@
           <span class="platform-tag">PS5</span>
           <span class="rank">04</span>
           <div class="play-btn">▶</div>
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2215430/library_600x900.jpg" alt="Ghost of Tsushima" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2215430/library_600x900.jpg" alt="Ghost" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="info">
           <div class="cat">Game · Samurai</div>
           <h3>Ghost of Yōtei</h3>
           <p class="desc">A new Ghost rises beneath the snow of Mount Yōtei. Sharper blade, colder wind.</p>
           <div class="row"><span class="date">2025</span><span>Sucker Punch</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>JP</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>JP</span></div>
         </div>
       </article>
 
@@ -1085,7 +1243,7 @@
           <h3>Starfield: Shattered Space</h3>
           <p class="desc">Va'ruun zealots, lost gravity, and a god that never sleeps.</p>
           <div class="row"><span class="date">2025</span><span>Bethesda</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
         </div>
       </article>
 
@@ -1104,27 +1262,178 @@
           <h3>Hades II</h3>
           <p class="desc">Melinoë takes the torch. Time-bending combat, deeper boons, a family wound.</p>
           <div class="row"><span class="date">2025</span><span>Supergiant</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span></div>
         </div>
       </article>
-
     </div>
+  </div>
+
+  <div class="expand-grid" id="gamesExpand">
+    <article class="card" data-open="rdr2">
+      <div class="thumb">
+        <div class="thumb-fallback">RED DEAD</div>
+        <span class="badge ghost">Classic</span>
+        <span class="rating-tag"><span class="star">★</span>9.7</span>
+        <span class="platform-tag">Steam · PS</span>
+        <span class="rank">07</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_600x900.jpg" alt="RDR2" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · Western</div>
+        <h3>Red Dead Redemption 2</h3>
+        <p class="desc">Arthur Morgan, the Van der Linde gang, and the slow death of the West.</p>
+        <div class="row"><span class="date">2018</span><span>Rockstar</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="bg3">
+      <div class="thumb">
+        <div class="thumb-fallback">BG3</div>
+        <span class="badge ghost">GOTY</span>
+        <span class="rating-tag"><span class="star">★</span>9.8</span>
+        <span class="platform-tag">Steam · PS5</span>
+        <span class="rank">08</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900.jpg" alt="BG3" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · RPG</div>
+        <h3>Baldur's Gate 3</h3>
+        <p class="desc">Larian's masterpiece. Every choice matters, every companion breaks your heart.</p>
+        <div class="row"><span class="date">2023</span><span>Larian</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="gow">
+      <div class="thumb">
+        <div class="thumb-fallback">GOD OF WAR</div>
+        <span class="badge ghost">Exclusive</span>
+        <span class="rating-tag"><span class="star">★</span>9.6</span>
+        <span class="platform-tag">PS5 · PC</span>
+        <span class="rank">09</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2322010/library_600x900.jpg" alt="GOW" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · Action</div>
+        <h3>God of War Ragnarök</h3>
+        <p class="desc">Kratos and Atreus walk into the apocalypse.</p>
+        <div class="row"><span class="date">2022</span><span>Santa Monica</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="spiderman2">
+      <div class="thumb">
+        <div class="thumb-fallback">SPIDER-MAN 2</div>
+        <span class="badge ghost">Exclusive</span>
+        <span class="rating-tag"><span class="star">★</span>9.2</span>
+        <span class="platform-tag">PS5</span>
+        <span class="rank">10</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2651280/library_600x900.jpg" alt="Spider-Man" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · Superhero</div>
+        <h3>Spider-Man 2</h3>
+        <p class="desc">Peter and Miles. Venom. New York swinging at 60fps.</p>
+        <div class="row"><span class="date">2023</span><span>Insomniac</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="lastofus2">
+      <div class="thumb">
+        <div class="thumb-fallback">TLOU2</div>
+        <span class="badge ghost">Exclusive</span>
+        <span class="rating-tag"><span class="star">★</span>9.3</span>
+        <span class="platform-tag">PS5 · PC</span>
+        <span class="rank">11</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2531310/library_600x900.jpg" alt="TLOU2" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · Survival</div>
+        <h3>The Last of Us Part II</h3>
+        <p class="desc">Revenge is a wound that never closes.</p>
+        <div class="row"><span class="date">2020</span><span>Naughty Dog</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="sekiro">
+      <div class="thumb">
+        <div class="thumb-fallback">SEKIRO</div>
+        <span class="badge ghost">Souls-like</span>
+        <span class="rating-tag"><span class="star">★</span>9.5</span>
+        <span class="platform-tag">PC · PS · Xbox</span>
+        <span class="rank">12</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_600x900.jpg" alt="Sekiro" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · Samurai</div>
+        <h3>Sekiro: Shadows Die Twice</h3>
+        <p class="desc">Hesitation is defeat.</p>
+        <div class="row"><span class="date">2019</span><span>FromSoftware</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>JP</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="witcher3">
+      <div class="thumb">
+        <div class="thumb-fallback">WITCHER 3</div>
+        <span class="badge ghost">Classic</span>
+        <span class="rating-tag"><span class="star">★</span>9.9</span>
+        <span class="platform-tag">PC · PS5</span>
+        <span class="rank">13</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_600x900.jpg" alt="Witcher 3" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · RPG</div>
+        <h3>The Witcher 3: Wild Hunt</h3>
+        <p class="desc">Geralt's last hunt. Still undefeated.</p>
+        <div class="row"><span class="date">2015</span><span>CD Projekt</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="minecraft">
+      <div class="thumb">
+        <div class="thumb-fallback">MINECRAFT</div>
+        <span class="badge ghost">Legendary</span>
+        <span class="rating-tag"><span class="star">★</span>9.4</span>
+        <span class="platform-tag">All Platforms</span>
+        <span class="rank">14</span>
+        <div class="play-btn">▶</div>
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1672970/library_600x900.jpg" alt="Minecraft" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Game · Sandbox</div>
+        <h3>Minecraft</h3>
+        <p class="desc">A block, a dream, an infinite world.</p>
+        <div class="row"><span class="date">2011</span><span>Mojang</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============ MOVIES ============ -->
 <section id="movies">
   <div class="section-head">
     <span class="index">02</span>
     <h2>MOVIES</h2>
     <span class="count">Netflix · Prime · Apple TV</span>
+    <button class="view-all" data-expand="moviesExpand">View All +</button>
   </div>
-
   <div class="rail-wrap">
     <button class="rail-btn prev" data-rail="moviesRail">←</button>
     <button class="rail-btn next" data-rail="moviesRail">→</button>
     <div class="rail" id="moviesRail">
-
       <article class="card" data-open="oppenheimer">
         <div class="thumb">
           <div class="thumb-fallback">OPPENHEIMER</div>
@@ -1138,28 +1447,28 @@
         <div class="info">
           <div class="cat">Movie · Drama</div>
           <h3>Oppenheimer</h3>
-          <p class="desc">The bomb, the man, the silence after. Nolan's three-hour detonation.</p>
+          <p class="desc">The bomb, the man, the silence after.</p>
           <div class="row"><span class="date">2023</span><span>Netflix</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
         </div>
       </article>
 
       <article class="card" data-open="dune2">
         <div class="thumb">
-          <div class="thumb-fallback">DUNE PART TWO</div>
+          <div class="thumb-fallback">DUNE 2</div>
           <span class="badge ghost">#2 Trending</span>
           <span class="rating-tag"><span class="star">★</span>9.0</span>
           <span class="platform-tag">Prime · Apple</span>
           <span class="rank">02</span>
           <div class="play-btn">▶</div>
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Dune Part Two" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Dune 2" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="info">
-          <div class="cat">Movie · Sci-Fi Epic</div>
+          <div class="cat">Movie · Sci-Fi</div>
           <h3>Dune: Part Two</h3>
-          <p class="desc">Paul walks the sand. The prophecy bends. Villeneuve's desert opera.</p>
+          <p class="desc">Paul walks the sand. The prophecy bends.</p>
           <div class="row"><span class="date">2024</span><span>Prime</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
         </div>
       </article>
 
@@ -1176,9 +1485,9 @@
         <div class="info">
           <div class="cat">Movie · Hindi</div>
           <h3>Jawan</h3>
-          <p class="desc">Shah Rukh Khan doubles down. A prison warden, a dozen hostages, a revenge plot.</p>
+          <p class="desc">Shah Rukh Khan doubles down.</p>
           <div class="row"><span class="date">2023</span><span>Netflix</span></div>
-          <div class="lang"><span>HI</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>HI</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
@@ -1195,16 +1504,16 @@
         <div class="info">
           <div class="cat">Movie · Korean</div>
           <h3>Parasite</h3>
-          <p class="desc">Bong Joon-ho's basement of a story. The rich are blind. The poor are hungry.</p>
+          <p class="desc">Bong Joon-ho's basement of a story.</p>
           <div class="row"><span class="date">2019</span><span>Netflix</span></div>
-          <div class="lang"><span>KO</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>KO</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
       <article class="card" data-open="theboys">
         <div class="thumb">
           <div class="thumb-fallback">THE BOYS</div>
-          <span class="badge ghost">Prime Original</span>
+          <span class="badge ghost">Prime</span>
           <span class="rating-tag"><span class="star">★</span>8.9</span>
           <span class="platform-tag">Prime</span>
           <span class="rank">05</span>
@@ -1214,29 +1523,180 @@
         <div class="info">
           <div class="cat">Series · Dark Satire</div>
           <h3>The Boys — S5</h3>
-          <p class="desc">Homelander cracks, Butcher bleeds out, America realizes it's the villain.</p>
+          <p class="desc">Homelander cracks, Butcher bleeds out.</p>
           <div class="row"><span class="date">2026</span><span>Prime</span></div>
-          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
         </div>
       </article>
-
     </div>
+  </div>
+
+  <div class="expand-grid" id="moviesExpand">
+    <article class="card" data-open="interstellar">
+      <div class="thumb">
+        <div class="thumb-fallback">INTERSTELLAR</div>
+        <span class="badge ghost">Classic</span>
+        <span class="rating-tag"><span class="star">★</span>9.5</span>
+        <span class="platform-tag">Prime</span>
+        <span class="rank">06</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Interstellar" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Sci-Fi</div>
+        <h3>Interstellar</h3>
+        <p class="desc">Love is the one thing that transcends time and space.</p>
+        <div class="row"><span class="date">2014</span><span>Nolan</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="inception">
+      <div class="thumb">
+        <div class="thumb-fallback">INCEPTION</div>
+        <span class="badge ghost">Classic</span>
+        <span class="rating-tag"><span class="star">★</span>9.3</span>
+        <span class="platform-tag">Netflix</span>
+        <span class="rank">07</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg" alt="Inception" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Thriller</div>
+        <h3>Inception</h3>
+        <p class="desc">A dream within a dream within a dream.</p>
+        <div class="row"><span class="date">2010</span><span>Nolan</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="darkknight">
+      <div class="thumb">
+        <div class="thumb-fallback">DARK KNIGHT</div>
+        <span class="badge ghost">Legendary</span>
+        <span class="rating-tag"><span class="star">★</span>9.7</span>
+        <span class="platform-tag">Netflix</span>
+        <span class="rank">08</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="Dark Knight" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Superhero</div>
+        <h3>The Dark Knight</h3>
+        <p class="desc">Why so serious?</p>
+        <div class="row"><span class="date">2008</span><span>Nolan</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="rrr">
+      <div class="thumb">
+        <div class="thumb-fallback">RRR</div>
+        <span class="badge ghost">Indian Epic</span>
+        <span class="rating-tag"><span class="star">★</span>8.8</span>
+        <span class="platform-tag">Netflix</span>
+        <span class="rank">09</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/nEufeZlyAOLqO2brrs0yeF1lgXO.jpg" alt="RRR" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Telugu</div>
+        <h3>RRR</h3>
+        <p class="desc">Two revolutionaries, one empire.</p>
+        <div class="row"><span class="date">2022</span><span>SS Rajamouli</span></div>
+        <div class="lang"><span>TE</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="spiderverse">
+      <div class="thumb">
+        <div class="thumb-fallback">SPIDER-VERSE</div>
+        <span class="badge ghost">Animation</span>
+        <span class="rating-tag"><span class="star">★</span>9.4</span>
+        <span class="platform-tag">Netflix</span>
+        <span class="rank">10</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Spider-Verse" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Animation</div>
+        <h3>Spider-Man: Across the Spider-Verse</h3>
+        <p class="desc">Every frame a painting.</p>
+        <div class="row"><span class="date">2023</span><span>Sony Animation</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="johnwick">
+      <div class="thumb">
+        <div class="thumb-fallback">JOHN WICK 4</div>
+        <span class="badge ghost">Action</span>
+        <span class="rating-tag"><span class="star">★</span>8.9</span>
+        <span class="platform-tag">Prime</span>
+        <span class="rank">11</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick 4" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Action</div>
+        <h3>John Wick: Chapter 4</h3>
+        <p class="desc">The Baba Yaga goes global.</p>
+        <div class="row"><span class="date">2023</span><span>Lionsgate</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="madmax">
+      <div class="thumb">
+        <div class="thumb-fallback">FURY ROAD</div>
+        <span class="badge ghost">Action</span>
+        <span class="rating-tag"><span class="star">★</span>9.0</span>
+        <span class="platform-tag">Netflix</span>
+        <span class="rank">12</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/hA2ple9q4qnwxp3hKVNhroipsir.jpg" alt="Mad Max" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Action</div>
+        <h3>Mad Max: Fury Road</h3>
+        <p class="desc">Witness me.</p>
+        <div class="row"><span class="date">2015</span><span>George Miller</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="pathaan">
+      <div class="thumb">
+        <div class="thumb-fallback">PATHAAN</div>
+        <span class="badge ghost">Hindi</span>
+        <span class="rating-tag"><span class="star">★</span>8.2</span>
+        <span class="platform-tag">Prime</span>
+        <span class="rank">13</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/mh9hnhSyGGnKzZmmCzKqJP1FqYV.jpg" alt="Pathaan" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Movie · Hindi</div>
+        <h3>Pathaan</h3>
+        <p class="desc">SRK returns.</p>
+        <div class="row"><span class="date">2023</span><span>YRF</span></div>
+        <div class="lang"><span>HI</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============ ANIME ============ -->
 <section id="anime">
   <div class="section-head">
     <span class="index">03</span>
     <h2>ANIME</h2>
     <span class="count">Crunchyroll · Netflix</span>
+    <button class="view-all" data-expand="animeExpand">View All +</button>
   </div>
-
   <div class="rail-wrap">
     <button class="rail-btn prev" data-rail="animeRail">←</button>
     <button class="rail-btn next" data-rail="animeRail">→</button>
     <div class="rail" id="animeRail">
-
       <article class="card" data-open="demonslayer">
         <div class="thumb">
           <div class="thumb-fallback">DEMON SLAYER</div>
@@ -1250,28 +1710,28 @@
         <div class="info">
           <div class="cat">Anime · Action</div>
           <h3>Demon Slayer: Infinity Castle</h3>
-          <p class="desc">The final arc. Every Breath collapses into one blade stroke. The sun, at last.</p>
+          <p class="desc">The final arc. Every Breath collapses into one blade stroke.</p>
           <div class="row"><span class="date">2025</span><span>Ufotable</span></div>
-          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
       <article class="card" data-open="jjk">
         <div class="thumb">
-          <div class="thumb-fallback">JUJUTSU KAISEN</div>
+          <div class="thumb-fallback">JJK</div>
           <span class="badge ghost">#2 Trending</span>
           <span class="rating-tag"><span class="star">★</span>9.4</span>
           <span class="platform-tag">Crunchyroll</span>
           <span class="rank">02</span>
           <div class="play-btn">▶</div>
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/hFWP7qZk8m9y6c4x8J7r5c1uL5Q.jpg" alt="Jujutsu Kaisen" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/hFWP7qZk8m9y6c4x8J7r5c1uL5Q.jpg" alt="JJK" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="info">
           <div class="cat">Anime · Dark Fantasy</div>
           <h3>Jujutsu Kaisen: Culling Game</h3>
-          <p class="desc">The colonies open. Sukuna walks. Yuji has one more punch and a whole country.</p>
+          <p class="desc">The colonies open. Sukuna walks.</p>
           <div class="row"><span class="date">2026</span><span>MAPPA</span></div>
-          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
@@ -1288,9 +1748,9 @@
         <div class="info">
           <div class="cat">Anime · Adventure</div>
           <h3>One Piece: Elbaph Arc</h3>
-          <p class="desc">The giants' island. The last Poneglyph. Luffy's laugh echoes off the World Tree.</p>
+          <p class="desc">The giants' island. The last Poneglyph.</p>
           <div class="row"><span class="date">2026</span><span>Toei</span></div>
-          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
@@ -1307,28 +1767,28 @@
         <div class="info">
           <div class="cat">Anime · Cyberpunk</div>
           <h3>Cyberpunk: Edgerunners S2</h3>
-          <p class="desc">A new crew, a new year, the same Night City chewing them up.</p>
+          <p class="desc">A new crew, a new year, the same Night City.</p>
           <div class="row"><span class="date">2026</span><span>Trigger</span></div>
-          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>Multi</span></div>
+          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
       <article class="card" data-open="aot">
         <div class="thumb">
-          <div class="thumb-fallback">ATTACK ON TITAN</div>
+          <div class="thumb-fallback">AOT</div>
           <span class="badge ghost">Season 4</span>
           <span class="rating-tag"><span class="star">★</span>9.6</span>
           <span class="platform-tag">Crunchyroll</span>
           <span class="rank">05</span>
           <div class="play-btn">▶</div>
-          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg" alt="Attack on Titan" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg" alt="AOT" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="info">
           <div class="cat">Anime · Epic</div>
           <h3>Attack on Titan: Requiem</h3>
-          <p class="desc">What if the Rumbling stopped? What if Eren came home? What if the walls sang?</p>
+          <p class="desc">What if the Rumbling stopped?</p>
           <div class="row"><span class="date">2025</span><span>MAPPA</span></div>
-          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
 
@@ -1345,24 +1805,382 @@
         <div class="info">
           <div class="cat">Anime · Action</div>
           <h3>Solo Leveling: Arise</h3>
-          <p class="desc">Jinwoo's shadow army grows. The Monarchs are waking. Done being polite.</p>
+          <p class="desc">Jinwoo's shadow army grows.</p>
           <div class="row"><span class="date">2026</span><span>A-1 Pictures</span></div>
-          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+          <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
         </div>
       </article>
-
     </div>
+  </div>
+
+  <div class="expand-grid" id="animeExpand">
+    <article class="card" data-open="naruto">
+      <div class="thumb">
+        <div class="thumb-fallback">NARUTO</div>
+        <span class="badge ghost">Classic</span>
+        <span class="rating-tag"><span class="star">★</span>9.2</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">07</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/xppeysfvDKVx775MFuH8Gf92KZ3.jpg" alt="Naruto" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Action</div>
+        <h3>Naruto Shippuden</h3>
+        <p class="desc">Believe it.</p>
+        <div class="row"><span class="date">2007</span><span>Pierrot</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="bleach-tybw">
+      <div class="thumb">
+        <div class="thumb-fallback">BLEACH</div>
+        <span class="badge ghost">Shonen</span>
+        <span class="rating-tag"><span class="star">★</span>9.3</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">08</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/fS2XQspIskvlHijmqPs0yixvmWo.jpg" alt="Bleach" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Shonen</div>
+        <h3>Bleach: TYBW Final Cour</h3>
+        <p class="desc">Ichigo vs Yhwach. One last swing.</p>
+        <div class="row"><span class="date">2025</span><span>Pierrot</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="chainsaw">
+      <div class="thumb">
+        <div class="thumb-fallback">CHAINSAW</div>
+        <span class="badge ghost">New</span>
+        <span class="rating-tag"><span class="star">★</span>9.1</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">09</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/npdB6tgmHRW2xQrbcKHUzpYV1g1.jpg" alt="Chainsaw Man" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Dark Fantasy</div>
+        <h3>Chainsaw Man</h3>
+        <p class="desc">Denji wanted a girlfriend. He got a chainsaw for a head.</p>
+        <div class="row"><span class="date">2022</span><span>MAPPA</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="myhero">
+      <div class="thumb">
+        <div class="thumb-fallback">MHA</div>
+        <span class="badge ghost">Shonen</span>
+        <span class="rating-tag"><span class="star">★</span>9.0</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">10</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/ivOLM47yJt90PzdnoxHx7I7l4bY.jpg" alt="MHA" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Superhero</div>
+        <h3>My Hero Academia</h3>
+        <p class="desc">Plus Ultra.</p>
+        <div class="row"><span class="date">2016</span><span>Bones</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="spyfamily">
+      <div class="thumb">
+        <div class="thumb-fallback">SPY×FAMILY</div>
+        <span class="badge ghost">Comedy</span>
+        <span class="rating-tag"><span class="star">★</span>9.2</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">11</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/8N91BQ9t0t4u7qoTsPuV6qCPmXc.jpg" alt="Spy x Family" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Comedy</div>
+        <h3>Spy × Family</h3>
+        <p class="desc">A spy, an assassin, and a telepath walk into a family.</p>
+        <div class="row"><span class="date">2022</span><span>Wit · CloverWorks</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="vinlandsaga">
+      <div class="thumb">
+        <div class="thumb-fallback">VINLAND</div>
+        <span class="badge ghost">Historical</span>
+        <span class="rating-tag"><span class="star">★</span>9.4</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">12</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/3O4eZWzXPBzRpbHK4JkzGhA7VjX.jpg" alt="Vinland Saga" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Historical</div>
+        <h3>Vinland Saga</h3>
+        <p class="desc">Thorfinn has no enemies.</p>
+        <div class="row"><span class="date">2019</span><span>Wit · MAPPA</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="deathnote">
+      <div class="thumb">
+        <div class="thumb-fallback">DEATH NOTE</div>
+        <span class="badge ghost">Legendary</span>
+        <span class="rating-tag"><span class="star">★</span>9.5</span>
+        <span class="platform-tag">Netflix</span>
+        <span class="rank">13</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/tCZFfYTIwrR7n94J6G14OYYLueI.jpg" alt="Death Note" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Thriller</div>
+        <h3>Death Note</h3>
+        <p class="desc">A notebook. A god complex.</p>
+        <div class="row"><span class="date">2006</span><span>Madhouse</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="fullmetal">
+      <div class="thumb">
+        <div class="thumb-fallback">FMA</div>
+        <span class="badge ghost">Legendary</span>
+        <span class="rating-tag"><span class="star">★</span>9.7</span>
+        <span class="platform-tag">Crunchyroll</span>
+        <span class="rank">14</span>
+        <div class="play-btn">▶</div>
+        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/5ZFUEOULaVml7pQuXxhpR2SmVUw.jpg" alt="FMA" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Anime · Adventure</div>
+        <h3>Fullmetal Alchemist: Brotherhood</h3>
+        <p class="desc">Equivalent exchange.</p>
+        <div class="row"><span class="date">2009</span><span>Bones</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============ COMING SOON ============ -->
-<section id="coming">
+<section id="sports">
   <div class="section-head">
     <span class="index">04</span>
-    <h2>COMING SOON</h2>
-    <span class="count">Unreleased · 2026 — 2027</span>
+    <h2>SPORTS</h2>
+    <span class="count">Live · Global · 24/7</span>
+    <button class="view-all" data-expand="sportsExpand">View All +</button>
+  </div>
+  <div class="rail-wrap">
+    <button class="rail-btn prev" data-rail="sportsRail">←</button>
+    <button class="rail-btn next" data-rail="sportsRail">→</button>
+    <div class="rail" id="sportsRail">
+      <article class="card" data-open="football">
+        <div class="thumb">
+          <div class="thumb-fallback">FOOTBALL</div>
+          <span class="badge live-badge">● LIVE</span>
+          <span class="rating-tag"><span class="star">★</span>9.6</span>
+          <span class="platform-tag">Champions</span>
+          <span class="rank">01</span>
+          <div class="play-btn">▶</div>
+          <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&h=800&fit=crop&q=85" alt="Football" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <div class="cat">Sport · Football</div>
+          <h3>Champions League</h3>
+          <p class="desc">Europe's elite.</p>
+          <div class="row"><span class="date">Live Now</span><span>UEFA</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-open="cricket">
+        <div class="thumb">
+          <div class="thumb-fallback">CRICKET</div>
+          <span class="badge live-badge">● LIVE</span>
+          <span class="rating-tag"><span class="star">★</span>9.4</span>
+          <span class="platform-tag">IPL</span>
+          <span class="rank">02</span>
+          <div class="play-btn">▶</div>
+          <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=600&h=800&fit=crop&q=85" alt="Cricket" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <div class="cat">Sport · Cricket</div>
+          <h3>IPL 2026</h3>
+          <p class="desc">The loudest league on earth.</p>
+          <div class="row"><span class="date">Live Now</span><span>BCCI</span></div>
+          <div class="lang"><span>HI</span><span class="dot"></span><span>EN</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-open="basketball">
+        <div class="thumb">
+          <div class="thumb-fallback">NBA</div>
+          <span class="badge live-badge">● LIVE</span>
+          <span class="rating-tag"><span class="star">★</span>9.3</span>
+          <span class="platform-tag">NBA</span>
+          <span class="rank">03</span>
+          <div class="play-btn">▶</div>
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&h=800&fit=crop&q=85" alt="Basketball" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <div class="cat">Sport · Basketball</div>
+          <h3>NBA Playoffs</h3>
+          <p class="desc">Best-of-seven.</p>
+          <div class="row"><span class="date">Live Now</span><span>NBA</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-open="f1">
+        <div class="thumb">
+          <div class="thumb-fallback">F1</div>
+          <span class="badge live-badge">● LIVE</span>
+          <span class="rating-tag"><span class="star">★</span>9.5</span>
+          <span class="platform-tag">F1</span>
+          <span class="rank">04</span>
+          <div class="play-btn">▶</div>
+          <img src="https://images.unsplash.com/photo-1541443131876-44b03de101c5?w=600&h=800&fit=crop&q=85" alt="F1" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <div class="cat">Sport · Motorsport</div>
+          <h3>Formula 1 2026</h3>
+          <p class="desc">Twenty-four races. New regs.</p>
+          <div class="row"><span class="date">Live Now</span><span>FIA</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-open="mma">
+        <div class="thumb">
+          <div class="thumb-fallback">UFC</div>
+          <span class="badge live-badge">● LIVE</span>
+          <span class="rating-tag"><span class="star">★</span>9.2</span>
+          <span class="platform-tag">UFC</span>
+          <span class="rank">05</span>
+          <div class="play-btn">▶</div>
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&h=800&fit=crop&q=85" alt="MMA" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <div class="cat">Sport · MMA</div>
+          <h3>UFC Fight Night</h3>
+          <p class="desc">Two fighters, one cage.</p>
+          <div class="row"><span class="date">Live Now</span><span>UFC</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-open="tennis">
+        <div class="thumb">
+          <div class="thumb-fallback">TENNIS</div>
+          <span class="badge live-badge">● LIVE</span>
+          <span class="rating-tag"><span class="star">★</span>9.1</span>
+          <span class="platform-tag">Grand Slam</span>
+          <span class="rank">06</span>
+          <div class="play-btn">▶</div>
+          <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=600&h=800&fit=crop&q=85" alt="Tennis" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <div class="cat">Sport · Tennis</div>
+          <h3>Grand Slam Tennis</h3>
+          <p class="desc">Centre court. Five sets.</p>
+          <div class="row"><span class="date">Live Now</span><span>ATP</span></div>
+          <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+        </div>
+      </article>
+    </div>
   </div>
 
+  <div class="expand-grid" id="sportsExpand">
+    <article class="card" data-open="epl">
+      <div class="thumb">
+        <div class="thumb-fallback">EPL</div>
+        <span class="badge live-badge">● LIVE</span>
+        <span class="rating-tag"><span class="star">★</span>9.5</span>
+        <span class="platform-tag">Premier</span>
+        <span class="rank">07</span>
+        <div class="play-btn">▶</div>
+        <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&h=800&fit=crop&q=85" alt="EPL" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Sport · Football</div>
+        <h3>Premier League</h3>
+        <p class="desc">38 weeks of the best football on earth.</p>
+        <div class="row"><span class="date">Live Now</span><span>EPL</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="mlb">
+      <div class="thumb">
+        <div class="thumb-fallback">MLB</div>
+        <span class="badge live-badge">● LIVE</span>
+        <span class="rating-tag"><span class="star">★</span>9.0</span>
+        <span class="platform-tag">Baseball</span>
+        <span class="rank">08</span>
+        <div class="play-btn">▶</div>
+        <img src="https://images.unsplash.com/photo-1508344928928-7165b67de128?w=600&h=800&fit=crop&q=85" alt="MLB" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Sport · Baseball</div>
+        <h3>MLB World Series</h3>
+        <p class="desc">162 games, one trophy.</p>
+        <div class="row"><span class="date">Live Now</span><span>MLB</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="nfl">
+      <div class="thumb">
+        <div class="thumb-fallback">NFL</div>
+        <span class="badge live-badge">● LIVE</span>
+        <span class="rating-tag"><span class="star">★</span>9.4</span>
+        <span class="platform-tag">Super Bowl</span>
+        <span class="rank">09</span>
+        <div class="play-btn">▶</div>
+        <img src="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=600&h=800&fit=crop&q=85" alt="NFL" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Sport · American Football</div>
+        <h3>NFL Sunday Night</h3>
+        <p class="desc">The biggest stage in American sports.</p>
+        <div class="row"><span class="date">Live Now</span><span>NFL</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+
+    <article class="card" data-open="boxing">
+      <div class="thumb">
+        <div class="thumb-fallback">BOXING</div>
+        <span class="badge live-badge">● LIVE</span>
+        <span class="rating-tag"><span class="star">★</span>9.3</span>
+        <span class="platform-tag">Title Fight</span>
+        <span class="rank">10</span>
+        <div class="play-btn">▶</div>
+        <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&h=800&fit=crop&q=85" alt="Boxing" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="info">
+        <div class="cat">Sport · Boxing</div>
+        <h3>World Heavyweight Title</h3>
+        <p class="desc">Twelve rounds. Two men.</p>
+        <div class="row"><span class="date">Live Now</span><span>WBC</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="coming">
+  <div class="section-head">
+    <span class="index">05</span>
+    <h2>COMING SOON</h2>
+    <span class="count">Unreleased · 2026 — 2027</span>
+    <button class="view-all" data-expand="comingExpand">View All +</button>
+  </div>
   <div class="soon-banner">
     <div class="img-side" data-open="gta6">
       <img src="https://i.ytimg.com/vi/QdBZY2fkU-0/maxresdefault.jpg" alt="GTA VI" loading="lazy"
@@ -1387,7 +2205,6 @@
   </div>
 
   <div class="grid" data-grid>
-
     <article class="card reveal" data-open="gta6">
       <div class="thumb">
         <div class="thumb-fallback">GTA VI</div>
@@ -1404,7 +2221,7 @@
         <h3>Grand Theft Auto VI</h3>
         <p class="desc">Vice City returns. Lucia and her partner carve a path through Leonida.</p>
         <div class="row"><span class="date">Nov 19, 2026</span><span>Rockstar</span></div>
-        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
       </div>
     </article>
 
@@ -1421,9 +2238,9 @@
       <div class="info">
         <div class="cat">Game · Sci-Fi RPG</div>
         <h3>Mass Effect 5</h3>
-        <p class="desc">BioWare returns. A new crew, an old wound, a choice that echoes across the Andromeda.</p>
+        <p class="desc">BioWare returns. A new crew, an old wound.</p>
         <div class="row"><span class="date">2027</span><span>BioWare</span></div>
-        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
       </div>
     </article>
 
@@ -1440,9 +2257,9 @@
       <div class="info">
         <div class="cat">Game · Action</div>
         <h3>Marvel's Wolverine</h3>
-        <p class="desc">Logan's claws come out in Insomniac's darkest game yet. Rage, memory, a man who can't die.</p>
+        <p class="desc">Logan's claws come out in Insomniac's darkest game yet.</p>
         <div class="row"><span class="date">Fall 2026</span><span>Insomniac</span></div>
-        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
       </div>
     </article>
 
@@ -1459,13 +2276,15 @@
       <div class="info">
         <div class="cat">Game · Dark Fantasy</div>
         <h3>The Witcher IV</h3>
-        <p class="desc">Ciri takes the Path. A new saga in the north — monsters, politics, a wolf medallion humming.</p>
+        <p class="desc">Ciri takes the Path.</p>
         <div class="row"><span class="date">2027</span><span>CD Projekt Red</span></div>
-        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
       </div>
     </article>
+  </div>
 
-    <article class="card reveal" data-open="bleach">
+  <div class="expand-grid" id="comingExpand">
+    <article class="card" data-open="bleach">
       <div class="thumb">
         <div class="thumb-fallback">BLEACH TYBW</div>
         <span class="badge soon">Coming Soon</span>
@@ -1478,13 +2297,13 @@
       <div class="info">
         <div class="cat">Anime · Shonen</div>
         <h3>Bleach: TYBW — Final Cour</h3>
-        <p class="desc">Ichigo vs Yhwach. Every Bankai, every soul, one last swing.</p>
+        <p class="desc">Ichigo vs Yhwach.</p>
         <div class="row"><span class="date">Late 2025</span><span>Pierrot</span></div>
-        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span><span class="dot"></span><span>HI</span></div>
+        <div class="lang"><span>JP</span><span class="dot"></span><span>EN</span></div>
       </div>
     </article>
 
-    <article class="card reveal" data-open="strangerthings">
+    <article class="card" data-open="strangerthings">
       <div class="thumb">
         <div class="thumb-fallback">STRANGER THINGS</div>
         <span class="badge soon">Coming Soon</span>
@@ -1497,56 +2316,58 @@
       <div class="info">
         <div class="cat">Series · Sci-Fi Horror</div>
         <h3>Stranger Things — S5</h3>
-        <p class="desc">The final season. Hawkins burns, Eleven's powers break, the Upside Down comes home.</p>
+        <p class="desc">Hawkins burns.</p>
         <div class="row"><span class="date">2025</span><span>Netflix</span></div>
-        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span><span class="dot"></span><span>Multi</span></div>
+        <div class="lang"><span>EN</span><span class="dot"></span><span>HI</span></div>
       </div>
     </article>
-
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
-<footer>
+<footer id="contact">
+  <div class="contact-section">
+    <div class="c-kicker">Get in touch</div>
+    <h4>Reach <span class="grad">Sukuna</span></h4>
+    <div class="contact-grid">
+      <a class="contact-card" href="https://t.me/vyxno" target="_blank" rel="noopener">
+        <div class="cc-label">Telegram</div>
+        <div class="cc-value">@vyxno</div>
+        <div class="cc-arrow">Open →</div>
+      </a>
+      <a class="contact-card" href="https://instagram.com/fmtgx" target="_blank" rel="noopener">
+        <div class="cc-label">Instagram</div>
+        <div class="cc-value">@fmtgx</div>
+        <div class="cc-arrow">Open →</div>
+      </a>
+      <a class="contact-card" href="mailto:hardikbangar19@hotmail.com" target="_blank" rel="noopener">
+        <div class="cc-label">Email</div>
+        <div class="cc-value">hardikbangar19@hotmail.com</div>
+        <div class="cc-arrow">Open →</div>
+      </a>
+    </div>
+  </div>
+
   <div class="big">SUKUNA</div>
   <div class="tag-line">Movies · Anime & Games Hub</div>
-  <div class="created">
-    <span class="cline"></span>
-    Created by <span>Sukuna</span>
-    <span class="cline"></span>
-  </div>
+
   <div class="foot-row">
     <span>© 2026 · All Languages · All Platforms</span>
-    <span>Curated by <span>Sukuna</span></span>
+    <div class="fl">
+      <a href="https://t.me/vyxno" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://instagram.com/fmtgx" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:hardikbangar19@hotmail.com">Email</a>
+    </div>
   </div>
 </footer>
 
-<!-- ============ MODAL ============ -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modal">
     <button class="modal-close" id="modalClose">✕</button>
     <div class="modal-scroll">
       <div class="modal-player">
-        <div class="modal-trailer">
-          <div id="ytPlayer"></div>
-        </div>
+        <div class="modal-trailer"><div id="ytPlayer"></div></div>
         <div class="player-controls">
           <button class="pc-play" id="pcPlayPause" aria-label="Pause">❚❚</button>
-
-          <div class="pc-group">
-            <span class="pc-label">Language</span>
-            <select class="pc-select" id="pcLang">
-              <option value="off">Off</option>
-              <option value="en" selected>English</option>
-              <option value="hi">Hindi</option>
-              <option value="ja">Japanese</option>
-              <option value="ko">Korean</option>
-              <option value="es">Spanish</option>
-              <option value="fr">French</option>
-              <option value="multi">Multi</option>
-            </select>
-          </div>
-
           <div class="pc-group">
             <span class="pc-label">Quality</span>
             <select class="pc-select" id="pcQuality">
@@ -1558,7 +2379,6 @@
               <option value="small">240p</option>
             </select>
           </div>
-
           <div class="pc-group">
             <span class="pc-label">Speed</span>
             <div class="pc-speed">
@@ -1567,19 +2387,30 @@
               <button id="pcSpeedUp" aria-label="Increase speed">+</button>
             </div>
           </div>
-
-          <span class="pc-live-dot">Live Player</span>
+          <a class="pc-direct" id="pcDirect" href="#" target="_blank" rel="noopener">▶ Watch on YouTube</a>
         </div>
       </div>
       <div class="modal-body">
         <div class="modal-cat" id="modalCat"></div>
         <h2 id="modalTitle"></h2>
         <div class="modal-meta" id="modalMeta"></div>
+
         <div class="modal-story-label">STORY</div>
         <p class="modal-story" id="modalStory"></p>
+
+        <div class="cast-section" id="castSection">
+          <div class="cast-label"><span class="cs-dot"></span><span id="castLabelText">Cast</span></div>
+          <div class="cast-list" id="modalCast"></div>
+        </div>
+
+        <div class="cast-section" id="charsSection">
+          <div class="cast-label"><span class="cs-dot"></span><span id="charsLabelText">Characters</span></div>
+          <div class="chars-list" id="modalChars"></div>
+        </div>
+
         <div class="modal-tags" id="modalTags"></div>
         <div class="modal-actions">
-          <button class="btn primary" id="modalWatch">Open on YouTube</button>
+          <a class="btn primary" id="modalWatch" href="#" target="_blank" rel="noopener">Open on YouTube</a>
           <button class="btn secondary" id="modalCloseBtn">Back</button>
         </div>
       </div>
@@ -1589,86 +2420,723 @@
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
+  // IMG = TMDB profile image path (w185 size) — used for real actor faces.
+  // If img is missing or fails, initials avatar shows automatically.
   const LIBRARY = {
-    gta6: { title: "Grand Theft Auto VI", cat: "Game · Open World · Crime", trailer: "QdBZY2fkU-0", rating: "9.8", release: "Nov 19, 2026 · 12:00 AM", studio: "Rockstar Games", platforms: "PC · PS5 · Xbox Series X|S", languages: "EN · HI · Multi", story: "Vice City returns — neon-drenched, sun-bleached, and more alive than ever. Lucia and her partner carve a path through the state of Leonida, where every deal has a body count and every sunset hides a debt coming due. Rockstar's biggest, most detailed open world yet.", tags: ["Open World", "Crime", "Action", "Vice City"] },
-    cyberpunk: { title: "Cyberpunk 2077: Orion", cat: "Game · RPG · Cyberpunk", trailer: "8X2kIfS6fb8", rating: "9.1", release: "2027 (TBA)", studio: "CD Projekt Red", platforms: "PC · PS5 · Xbox", languages: "EN · HI · Multi", story: "Night City rebuilt — deeper districts, dynamic factions, a story that bleeds neon.", tags: ["RPG", "Cyberpunk", "Open World"] },
-    eldenring: { title: "Elden Ring: Nightreign", cat: "Game · Souls-like · Co-op", trailer: "E3Huy2cdih0", rating: "9.4", release: "2025", studio: "FromSoftware", platforms: "PC · Xbox · PS", languages: "EN · JP · Multi", story: "Three-night runs across a fractured Lands Between. Shifting bosses, collapsing geometry, and a timer that hunts you.", tags: ["Souls-like", "Co-op", "Roguelike"] },
-    ghost: { title: "Ghost of Yōtei", cat: "Game · Samurai · Action", trailer: "iqysm2XZ6d0", rating: "9.3", release: "2025", studio: "Sucker Punch", platforms: "PS5", languages: "EN · JP · HI", story: "A new Ghost rises beneath the snow of Mount Yōtei. Sharper blade, colder wind.", tags: ["Samurai", "Action", "Exclusive"] },
-    starfield: { title: "Starfield: Shattered Space", cat: "Game · Space RPG", trailer: "pYqyVFVRAGU", rating: "8.7", release: "2025", studio: "Bethesda", platforms: "Xbox · PC", languages: "EN · HI · Multi", story: "A pocket dimension of Va'ruun zealots, lost gravity, and a god that never sleeps.", tags: ["Space", "RPG", "Expansion"] },
-    hades2: { title: "Hades II", cat: "Game · Roguelike", trailer: "t7HiV0Ayj9Y", rating: "9.0", release: "2025", studio: "Supergiant Games", platforms: "PC · Steam", languages: "EN · Multi", story: "Melinoë takes the torch. Time-bending combat, deeper boons, a family wound.", tags: ["Roguelike", "Action", "Indie"] },
-    oppenheimer: { title: "Oppenheimer", cat: "Movie · Drama · History", trailer: "uYPbbksJxIg", rating: "8.0", release: "July 19, 2023", studio: "Christopher Nolan", platforms: "Netflix · Prime", languages: "EN · HI · Multi", story: "The bomb, the man, the silence after. Nolan's three-hour detonation.", tags: ["Biography", "Drama", "Nolan"] },
-    dune2: { title: "Dune: Part Two", cat: "Movie · Sci-Fi Epic", trailer: "Way9Dexny3w", rating: "9.0", release: "March 1, 2024", studio: "Denis Villeneuve", platforms: "Prime · Apple TV", languages: "EN · HI · Multi", story: "Paul Atreides walks the sand between prophecy and madness. The Fremen rise, the Harkonnen fall.", tags: ["Sci-Fi", "Epic", "Cinema"] },
-    jawan: { title: "Jawan", cat: "Movie · Hindi · Action", trailer: "MWOlnZSnXJo", rating: "8.4", release: "September 7, 2023", studio: "Atlee", platforms: "Netflix", languages: "HI · EN · Multi", story: "Shah Rukh Khan doubles down. A prison warden, a dozen hostages, a revenge plot that rewrites the country.", tags: ["Bollywood", "Action", "SRK"] },
-    parasite: { title: "Parasite", cat: "Movie · Korean · Thriller", trailer: "5xH0HfJcnS4", rating: "9.1", release: "May 30, 2019", studio: "Bong Joon-ho", platforms: "Netflix", languages: "KO · EN · HI", story: "Bong Joon-ho's basement of a story. The rich are blind. The poor are hungry. The stairs go both ways.", tags: ["Korean", "Thriller", "Oscar Winner"] },
-    theboys: { title: "The Boys — Season 5", cat: "Series · Dark Satire · Superhero", trailer: "M1bhOaLV4FU", rating: "8.9", release: "2026", studio: "Eric Kripke · Prime", platforms: "Prime Video", languages: "EN · HI · Multi", story: "The final season. Homelander cracks, Butcher bleeds out, and America realizes it's been the villain all along.", tags: ["Dark Satire", "Superhero", "Final Season"] },
-    demonslayer: { title: "Demon Slayer: Infinity Castle", cat: "Anime · Action · Dark Fantasy", trailer: "WiiWYl2tUC0", rating: "9.5", release: "September 12, 2025", studio: "Ufotable", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "The final arc reaches the screen. The last stand against Muzan's upper moons inside a castle that bends time and breath.", tags: ["Anime", "Action", "Ufotable"] },
-    jjk: { title: "Jujutsu Kaisen: Culling Game", cat: "Anime · Dark Fantasy", trailer: "g0SLmWJtxUw", rating: "9.4", release: "2026", studio: "MAPPA", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "The colonies open. Sukuna walks. Yuji has one more punch and a whole country to hit with it.", tags: ["Anime", "Dark Fantasy", "MAPPA"] },
-    onepiece: { title: "One Piece: Elbaph Arc", cat: "Anime · Adventure", trailer: "MCb13lbVGE0", rating: "9.3", release: "2026", studio: "Toei Animation", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "The giants' island. The last Poneglyph. Luffy's laugh echoes off the World Tree.", tags: ["Anime", "Adventure", "Shonen"] },
-    edgerunners: { title: "Cyberpunk: Edgerunners S2", cat: "Anime · Cyberpunk", trailer: "JtqIas3bYhg", rating: "9.0", release: "2026", studio: "Studio Trigger", platforms: "Netflix", languages: "JP · EN · Multi", story: "A new crew, a new year, the same Night City chewing them up.", tags: ["Anime", "Cyberpunk", "Trigger"] },
-    aot: { title: "Attack on Titan: Requiem", cat: "Anime · Epic", trailer: "SlNpRThS9t8", rating: "9.6", release: "2025", studio: "MAPPA", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "What if the Rumbling stopped? What if Eren came home? What if the walls still sang?", tags: ["Anime", "Epic", "Titans"] },
-    sololeveling: { title: "Solo Leveling: Arise", cat: "Anime · Action", trailer: "1ZKUH1ntm3g", rating: "8.8", release: "2026", studio: "A-1 Pictures", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Jinwoo's shadow army grows. The Monarchs are waking. Done being polite.", tags: ["Anime", "Action", "Level Up"] },
-    masseffect: { title: "Mass Effect 5", cat: "Game · Sci-Fi RPG", trailer: "Lg-C2oq-pg8", rating: "9.5", release: "2027 (TBA)", studio: "BioWare", platforms: "PS5 · Xbox · PC", languages: "EN · HI · Multi", story: "BioWare returns to the galaxy. A new crew, an old wound, a choice that will echo across the Andromeda.", tags: ["Sci-Fi", "RPG", "BioWare"] },
-    wolverine: { title: "Marvel's Wolverine", cat: "Game · Action · Superhero", trailer: "yOSb6vQk7rU", rating: "9.2", release: "Fall 2026", studio: "Insomniac Games", platforms: "PS5", languages: "EN · HI · Multi", story: "Logan's claws come out in Insomniac's darkest game yet. A story of rage, memory, and a man who can't die but wants to.", tags: ["Superhero", "Action", "Wolverine"] },
-    witcher4: { title: "The Witcher IV", cat: "Game · Dark Fantasy · RPG", trailer: "Cw30pK3h3XU", rating: "9.6", release: "2027 (TBA)", studio: "CD Projekt Red", platforms: "PS5 · PC", languages: "EN · HI · Multi", story: "Ciri takes the Path. A new saga begins in the north — monsters, politics, and a wolf medallion that won't stop humming.", tags: ["Witcher", "RPG", "Ciri"] },
-    bleach: { title: "Bleach: TYBW — Final Cour", cat: "Anime · Shonen · Action", trailer: "B1FpJn6gU2o", rating: "9.3", release: "Late 2025", studio: "Studio Pierrot", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Ichigo vs Yhwach. Every Bankai, every soul, one last swing.", tags: ["Anime", "Shonen", "Ichigo"] },
-    strangerthings: { title: "Stranger Things — Season 5", cat: "Series · Sci-Fi Horror", trailer: "d0NqBSnR0Dk", rating: "9.1", release: "2025", studio: "Duffer Brothers · Netflix", platforms: "Netflix", languages: "EN · HI · Multi", story: "The final season. Hawkins burns, Eleven's powers break, and the Upside Down finally comes home.", tags: ["Sci-Fi", "Horror", "Final Season"] }
+    gta6: { title: "Grand Theft Auto VI", cat: "Game · Open World · Crime", trailer: "QdBZY2fkU-0", rating: "9.8", release: "Nov 19, 2026 · 12:00 AM", studio: "Rockstar Games", platforms: "PC · PS5 · Xbox Series X|S", languages: "EN · HI · Multi", story: "Vice City returns — neon-drenched, sun-bleached, and more alive than ever. Lucia and her partner carve a path through the state of Leonida, where every deal has a body count and every sunset hides a debt coming due.", tags: ["Open World", "Crime", "Action", "Vice City"],
+      castLabel: "Main Cast (voice / mocap)",
+      cast: [
+        { actor: "Manni L. Perez", role: "Lucia Caminos", img: null },
+        { actor: "Dylan Rourke", role: "Jason Duval", img: null },
+        { actor: "Cal Hampton", role: "Supporting cast", img: null },
+        { actor: "Boobie Ike", role: "Drug kingpin", img: null }
+      ],
+      charsLabel: "Characters",
+      chars: [
+        { name: "Lucia Caminos", role: "Playable lead" },
+        { name: "Jason Duval", role: "Playable lead" },
+        { name: "Cal Hampton", role: "Jason's friend" },
+        { name: "Boobie Ike", role: "Drug kingpin" },
+        { name: "Dre'Quan Priest", role: "Real Dimez" },
+        { name: "Raul Bautista", role: "Heist planner" }
+      ]
+    },
+    cyberpunk: { title: "Cyberpunk 2077: Orion", cat: "Game · RPG · Cyberpunk", trailer: "8X2kIfS6fb8", rating: "9.1", release: "2027 (TBA)", studio: "CD Projekt Red", platforms: "PC · PS5 · Xbox", languages: "EN · HI · Multi", story: "Night City rebuilt — deeper districts, dynamic factions, a story that bleeds neon.", tags: ["RPG", "Cyberpunk", "Open World"],
+      castLabel: "Cast (TBA — Project Orion)", cast: [{ actor: "TBA", role: "New protagonist", img: null }],
+      charsLabel: "Characters", chars: [{ name: "V", role: "Legacy (referenced)" }, { name: "Johnny Silverhand", role: "Legacy (referenced)" }, { name: "New protagonist", role: "TBA" }]
+    },
+    eldenring: { title: "Elden Ring: Nightreign", cat: "Game · Souls-like · Co-op", trailer: "E3Huy2cdih0", rating: "9.4", release: "2025", studio: "FromSoftware", platforms: "PC · Xbox · PS", languages: "EN · JP · Multi", story: "Three-night runs across a fractured Lands Between.", tags: ["Souls-like", "Co-op", "Roguelike"],
+      castLabel: "Main Cast (voice)", cast: [
+        { actor: "Erin Yvette", role: "Ranni the Witch", img: "/qw2gVY9P8KzYwSX8bBbQ7ZK1hmL.jpg" },
+        { actor: "Anthony Howell", role: "Margit / Morgott", img: null },
+        { actor: "Jason Connery", role: "Gideon Ofnir", img: null }
+      ],
+      charsLabel: "Characters / Nightfarers", chars: [
+        { name: "The Wylder", role: "Nightfarer — bow" },
+        { name: "The Guardian", role: "Nightfarer — shield" },
+        { name: "The Duchess", role: "Nightfarer — daggers" },
+        { name: "The Recluse", role: "Nightfarer — magic" },
+        { name: "The Revenant", role: "Nightfarer — necromancy" },
+        { name: "The Executor", role: "Nightfarer — katana" }
+      ]
+    },
+    ghost: { title: "Ghost of Yōtei", cat: "Game · Samurai · Action", trailer: "iqysm2XZ6d0", rating: "9.3", release: "2025", studio: "Sucker Punch", platforms: "PS5", languages: "EN · JP · HI", story: "A new Ghost rises beneath the snow of Mount Yōtei.", tags: ["Samurai", "Action", "Exclusive"],
+      castLabel: "Main Cast", cast: [{ actor: "Erika Ishii", role: "Atsu (protagonist)", img: null }],
+      charsLabel: "Characters", chars: [{ name: "Atsu", role: "New Ghost / protagonist" }, { name: "The Six", role: "Antagonists" }]
+    },
+    starfield: { title: "Starfield: Shattered Space", cat: "Game · Space RPG", trailer: "pYqyVFVRAGU", rating: "8.7", release: "2025", studio: "Bethesda", platforms: "Xbox · PC", languages: "EN · HI · Multi", story: "Va'ruun zealots, lost gravity, a god that never sleeps.", tags: ["Space", "RPG", "Expansion"],
+      castLabel: "Main Cast (voice)", cast: [
+        { actor: "Elias Toufexis", role: "Sam Coe", img: null },
+        { actor: "Craig Sechler", role: "Multiple NPCs", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "The Player (Starborn)", role: "Protagonist" },
+        { name: "Sam Coe", role: "Companion" },
+        { name: "Sarah Morgan", role: "Constellation leader" },
+        { name: "Andreja", role: "Companion" }
+      ]
+    },
+    hades2: { title: "Hades II", cat: "Game · Roguelike", trailer: "t7HiV0Ayj9Y", rating: "9.0", release: "2025", studio: "Supergiant Games", platforms: "PC · Steam", languages: "EN · Multi", story: "Melinoë takes the torch.", tags: ["Roguelike", "Action", "Indie"],
+      castLabel: "Main Cast (voice)", cast: [
+        { actor: "Judy Alice Lee", role: "Melinoë", img: null },
+        { actor: "Logan Cunningham", role: "Hades / Poseidon / narrator", img: null },
+        { actor: "Amelia Tyler", role: "Hecate", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Melinoë", role: "Protagonist" },
+        { name: "Hecate", role: "Mentor" },
+        { name: "Chronos", role: "Antagonist" },
+        { name: "Hades", role: "Father" },
+        { name: "Nemesis", role: "Rival / ally" }
+      ]
+    },
+    rdr2: { title: "Red Dead Redemption 2", cat: "Game · Western · Open World", trailer: "eaW0tYpxyp0", rating: "9.7", release: "October 26, 2018", studio: "Rockstar Games", platforms: "PC · PS4 · Xbox", languages: "EN · HI · Multi", story: "Arthur Morgan, the Van der Linde gang, and the slow death of the West.", tags: ["Western", "Story Rich", "Open World"],
+      castLabel: "Main Cast (voice / mocap)", cast: [
+        { actor: "Roger Clark", role: "Arthur Morgan", img: "/2gXwWwJDKsyHMK1QLKQxHWQqY5r.jpg" },
+        { actor: "Rob Wiethoff", role: "John Marston", img: null },
+        { actor: "Benjamin Byron Davis", role: "Dutch van der Linde", img: null },
+        { actor: "Peter Blomquist", role: "Micah Bell", img: null },
+        { actor: "Alex McKenna", role: "Sadie Adler", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Arthur Morgan", role: "Protagonist — outlaw" },
+        { name: "John Marston", role: "Deuteragonist" },
+        { name: "Dutch van der Linde", role: "Gang leader" },
+        { name: "Micah Bell", role: "Antagonist" },
+        { name: "Sadie Adler", role: "Bounty hunter" }
+      ]
+    },
+    bg3: { title: "Baldur's Gate 3", cat: "Game · RPG · Fantasy", trailer: "1T22wNvoNiU", rating: "9.8", release: "August 3, 2023", studio: "Larian Studios", platforms: "PC · PS5 · Xbox", languages: "EN · HI · Multi", story: "Every choice matters, every companion breaks your heart.", tags: ["D&D", "RPG", "GOTY"],
+      castLabel: "Main Cast (voice / mocap)", cast: [
+        { actor: "Amelia Tyler", role: "Narrator", img: null },
+        { actor: "Neil Newbon", role: "Astarion", img: null },
+        { actor: "Jennifer English", role: "Shadowheart", img: null },
+        { actor: "Devora Wilde", role: "Lae'zel", img: null },
+        { actor: "Tim Downie", role: "Gale", img: null },
+        { actor: "Samantha Béart", role: "Karlach", img: null },
+        { actor: "Theo Solomon", role: "Wyll", img: null }
+      ],
+      charsLabel: "Origins & Companions", chars: [
+        { name: "The Dark Urge", role: "Custom origin" },
+        { name: "Astarion", role: "Rogue vampire" },
+        { name: "Shadowheart", role: "Cleric" },
+        { name: "Lae'zel", role: "Githyanki fighter" },
+        { name: "Gale", role: "Wizard" },
+        { name: "Karlach", role: "Barbarian" },
+        { name: "Wyll", role: "Warlock" }
+      ]
+    },
+    gow: { title: "God of War Ragnarök", cat: "Game · Action · Mythology", trailer: "EE-4GvjKcfs", rating: "9.6", release: "November 9, 2022", studio: "Santa Monica Studio", platforms: "PS5 · PC", languages: "EN · HI · Multi", story: "Kratos and Atreus walk into the apocalypse.", tags: ["Norse", "Action", "Exclusive"],
+      castLabel: "Main Cast (voice / mocap)", cast: [
+        { actor: "Christopher Judge", role: "Kratos", img: "/3nX5dEZGvQ5QzHcHzqaMxQxV8jY.jpg" },
+        { actor: "Sunny Suljic", role: "Atreus", img: null },
+        { actor: "Danielle Bisutti", role: "Freya", img: null },
+        { actor: "Alastair Duncan", role: "Mimir", img: null },
+        { actor: "Ryan Hurst", role: "Thor", img: null },
+        { actor: "Richard Schiff", role: "Odin", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Kratos", role: "Protagonist" },
+        { name: "Atreus (Loki)", role: "Deuteragonist" },
+        { name: "Freya", role: "Ally / antagonist" },
+        { name: "Mimir", role: "Companion" },
+        { name: "Thor", role: "Antagonist" },
+        { name: "Odin", role: "Main antagonist" }
+      ]
+    },
+    spiderman2: { title: "Spider-Man 2", cat: "Game · Superhero · Action", trailer: "9fVYKsEmuRs", rating: "9.2", release: "October 20, 2023", studio: "Insomniac Games", platforms: "PS5", languages: "EN · HI · Multi", story: "Peter and Miles. Venom. New York swinging at 60fps.", tags: ["Superhero", "Swinging", "Exclusive"],
+      castLabel: "Main Cast (voice / mocap)", cast: [
+        { actor: "Yuri Lowenthal", role: "Peter Parker / Spider-Man", img: null },
+        { actor: "Nadji Jeter", role: "Miles Morales / Spider-Man", img: null },
+        { actor: "Laura Bailey", role: "Mary Jane Watson", img: "/93aR5SXHkfw4hjqH4Bp1UmxZrCv.jpg" },
+        { actor: "Tony Todd", role: "Venom", img: "/2J9gNBvJ8V1ppYVdYB86qSHxFbT.jpg" },
+        { actor: "Jim Pirri", role: "Kraven the Hunter", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Peter Parker", role: "Spider-Man" },
+        { name: "Miles Morales", role: "Spider-Man" },
+        { name: "Mary Jane Watson", role: "Journalist" },
+        { name: "Venom", role: "Main antagonist" },
+        { name: "Kraven the Hunter", role: "Antagonist" }
+      ]
+    },
+    lastofus2: { title: "The Last of Us Part II", cat: "Game · Survival · Drama", trailer: "vhII1qlcZ4E", rating: "9.3", release: "June 19, 2020", studio: "Naughty Dog", platforms: "PS5 · PC", languages: "EN · HI · Multi", story: "Revenge is a wound that never closes.", tags: ["Survival", "Story Rich", "Exclusive"],
+      castLabel: "Main Cast (voice / mocap)", cast: [
+        { actor: "Ashley Johnson", role: "Ellie", img: "/2mIlOZq9Z5usnkH8DfmdTJdvhEw.jpg" },
+        { actor: "Laura Bailey", role: "Abby", img: "/93aR5SXHkfw4hjqH4Bp1UmxZrCv.jpg" },
+        { actor: "Troy Baker", role: "Joel Miller", img: "/aZ7EgB0rKzMTGBVIjzq6qNhAHqx.jpg" },
+        { actor: "Shannon Woodward", role: "Dina", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Ellie", role: "Protagonist" },
+        { name: "Abby", role: "Deuteragonist" },
+        { name: "Joel Miller", role: "Ellie's father figure" },
+        { name: "Dina", role: "Ellie's partner" },
+        { name: "Lev", role: "Seraphite runaway" }
+      ]
+    },
+    sekiro: { title: "Sekiro: Shadows Die Twice", cat: "Game · Samurai · Souls-like", trailer: "rXMX4YJ7Lks", rating: "9.5", release: "March 22, 2019", studio: "FromSoftware", platforms: "PC · PS · Xbox", languages: "EN · JP · HI", story: "Hesitation is defeat.", tags: ["Samurai", "Souls-like", "Hard"],
+      castLabel: "Main Cast (voice)", cast: [
+        { actor: "Noshir Dalal", role: "Wolf (protagonist)", img: null },
+        { actor: "Darin De Paul", role: "Isshin Ashina", img: null },
+        { actor: "Ray Chase", role: "Genichiro Ashina", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Wolf", role: "Protagonist — shinobi" },
+        { name: "Kuro", role: "Divine Heir" },
+        { name: "Genichiro Ashina", role: "Antagonist" },
+        { name: "Isshin Ashina", role: "Sword Saint" }
+      ]
+    },
+    witcher3: { title: "The Witcher 3: Wild Hunt", cat: "Game · RPG · Fantasy", trailer: "c0i88t0Kacs", rating: "9.9", release: "May 19, 2015", studio: "CD Projekt Red", platforms: "PC · PS5 · Xbox", languages: "EN · HI · Multi", story: "Geralt's last hunt.", tags: ["RPG", "Fantasy", "Classic"],
+      castLabel: "Main Cast (voice)", cast: [
+        { actor: "Doug Cockle", role: "Geralt of Rivia", img: null },
+        { actor: "Jo Wyatt", role: "Ciri", img: null },
+        { actor: "Denise Gough", role: "Yennefer", img: "/qA9RnIkQnQzKmDGcVwjFQeMpq4L.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Geralt of Rivia", role: "Protagonist — witcher" },
+        { name: "Ciri", role: "Deuteragonist" },
+        { name: "Yennefer", role: "Sorceress" },
+        { name: "Triss Merigold", role: "Sorceress" },
+        { name: "Eredin", role: "Main antagonist" }
+      ]
+    },
+    minecraft: { title: "Minecraft", cat: "Game · Sandbox · Survival", trailer: "MmB9b5njVbA", rating: "9.4", release: "November 18, 2011", studio: "Mojang", platforms: "All Platforms", languages: "EN · HI · Multi", story: "A block, a dream, an infinite world.", tags: ["Sandbox", "Survival", "Classic"],
+      castLabel: "Cast", cast: [{ actor: "No voice cast", role: "Sandbox", img: null }],
+      charsLabel: "Characters", chars: [{ name: "Steve", role: "Default" }, { name: "Alex", role: "Default" }]
+    },
+
+    oppenheimer: { title: "Oppenheimer", cat: "Movie · Drama · History", trailer: "uYPbbksJxIg", rating: "8.0", release: "July 19, 2023", studio: "Christopher Nolan", platforms: "Netflix · Prime", languages: "EN · HI · Multi", story: "The bomb, the man, the silence after.", tags: ["Biography", "Drama", "Nolan"],
+      castLabel: "Cast", cast: [
+        { actor: "Cillian Murphy", role: "J. Robert Oppenheimer", img: "/llkbyWKwpfowZ6C8peBjIV9jj99.jpg" },
+        { actor: "Emily Blunt", role: "Kitty Oppenheimer", img: "/5nCSG5uLmG1kLRzsWGWCkmqvvP0.jpg" },
+        { actor: "Matt Damon", role: "Leslie Groves", img: "/At3JgvaNeEN4Z4ESKlhhes85Xo3.jpg" },
+        { actor: "Robert Downey Jr.", role: "Lewis Strauss", img: "/im9SAqJPZKEbVZGmjXuLI4O7RvM.jpg" },
+        { actor: "Florence Pugh", role: "Jean Tatlock", img: "/6rF7x6GmNzS8J0xL7dqG0rB0VgZ.jpg" },
+        { actor: "Josh Hartnett", role: "Ernest Lawrence", img: "/9UpN6dQ4m3mzJc8r0vJs2dJcqzY.jpg" },
+        { actor: "Rami Malek", role: "David Hill", img: "/uP4qB6YS4R5ExV6s9s8qBVX0dcr.jpg" },
+        { actor: "Kenneth Branagh", role: "Niels Bohr", img: "/AbC8Hqz6oQ8e5Vv8Q0b3g3gXg2p.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "J. Robert Oppenheimer", role: "Lead — physicist" },
+        { name: "Kitty Oppenheimer", role: "Wife" },
+        { name: "Lewis Strauss", role: "Antagonist" },
+        { name: "Leslie Groves", role: "Military director" },
+        { name: "Jean Tatlock", role: "Lover" }
+      ]
+    },
+    dune2: { title: "Dune: Part Two", cat: "Movie · Sci-Fi Epic", trailer: "Way9Dexny3w", rating: "9.0", release: "March 1, 2024", studio: "Denis Villeneuve", platforms: "Prime · Apple TV", languages: "EN · HI · Multi", story: "Paul Atreides walks the sand between prophecy and madness.", tags: ["Sci-Fi", "Epic", "Cinema"],
+      castLabel: "Cast", cast: [
+        { actor: "Timothée Chalamet", role: "Paul Atreides", img: "/BE2sdjpgsa2rNTFa66f7upkaOP.jpg" },
+        { actor: "Zendaya", role: "Chani", img: "/3WdOloHpjtjL96uVOhFRRCcYSwq.jpg" },
+        { actor: "Rebecca Ferguson", role: "Lady Jessica", img: "/lJloTOheuQSirSLXNA3JHsrMNfH.jpg" },
+        { actor: "Austin Butler", role: "Feyd-Rautha", img: "/gh1pQk7wMlrqX0Q1s8x2WqFPp0C.jpg" },
+        { actor: "Javier Bardem", role: "Stilgar", img: "/w8R6JVQ9mz4qvSjqT4eK1FQXMVj.jpg" },
+        { actor: "Josh Brolin", role: "Gurney Halleck", img: "/sX2etBbIkxRaCsATyw5SvXTmApt.jpg" },
+        { actor: "Florence Pugh", role: "Princess Irulan", img: "/6rF7x6GmNzS8J0xL7dqG0rB0VgZ.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Paul Atreides", role: "Protagonist" },
+        { name: "Chani", role: "Fremen love interest" },
+        { name: "Lady Jessica", role: "Mother" },
+        { name: "Feyd-Rautha", role: "Antagonist" },
+        { name: "Stilgar", role: "Fremen leader" }
+      ]
+    },
+    jawan: { title: "Jawan", cat: "Movie · Hindi · Action", trailer: "MWOlnZSnXJo", rating: "8.4", release: "September 7, 2023", studio: "Atlee", platforms: "Netflix", languages: "HI · EN · Multi", story: "Shah Rukh Khan doubles down.", tags: ["Bollywood", "Action", "SRK"],
+      castLabel: "Cast", cast: [
+        { actor: "Shah Rukh Khan", role: "Azad / Vikram Rathore", img: "/8Uit3Kt7VgnU2nL0mT5ADlH2B8v.jpg" },
+        { actor: "Nayanthara", role: "Narmada Rai", img: "/1XzM8s8W8hN1XQ3q2c0vT8P1yKk.jpg" },
+        { actor: "Vijay Sethupathi", role: "Kalee Gaikwad", img: "/r1gL1pXlqMqhVSqkRmXqRPZ1M8g.jpg" },
+        { actor: "Deepika Padukone", role: "Aishwarya Rathore", img: "/sJ7MNxMgSK8jTQ5cMcmXCfqrqvO.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Azad", role: "Protagonist — warden" },
+        { name: "Vikram Rathore", role: "Azad's father" },
+        { name: "Kalee Gaikwad", role: "Antagonist" }
+      ]
+    },
+    parasite: { title: "Parasite", cat: "Movie · Korean · Thriller", trailer: "5xH0HfJcnS4", rating: "9.1", release: "May 30, 2019", studio: "Bong Joon-ho", platforms: "Netflix", languages: "KO · EN · HI", story: "The stairs go both ways.", tags: ["Korean", "Thriller", "Oscar Winner"],
+      castLabel: "Cast", cast: [
+        { actor: "Song Kang-ho", role: "Kim Ki-taek", img: "/j3n09v3CjZ1kYjK8TqvTgB6V0pJ.jpg" },
+        { actor: "Lee Sun-kyun", role: "Park Dong-ik", img: "/4rSfB3rqzY5yHqZ1WXbG6jFQx3x.jpg" },
+        { actor: "Cho Yeo-jeong", role: "Choi Yeon-gyo", img: "/9X3nJ3V8YVdJz7bUx2Vw8ZzT6wz.jpg" },
+        { actor: "Choi Woo-shik", role: "Kim Ki-woo", img: "/bQwBnBdZ8Fq3c5E1YqXwA0K8Vq6.jpg" },
+        { actor: "Park So-dam", role: "Kim Ki-jung", img: "/lY2wM6XhK1qB5pX3z9zQ3w2b6nq.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Kim Ki-taek", role: "Patriarch — poor family" },
+        { name: "Park Dong-ik", role: "Wealthy patriarch" },
+        { name: "Choi Yeon-gyo", role: "Wealthy matriarch" },
+        { name: "Kim Ki-woo", role: "Son — tutor" },
+        { name: "Kim Ki-jung", role: "Daughter — art therapist" }
+      ]
+    },
+    theboys: { title: "The Boys — Season 5", cat: "Series · Dark Satire · Superhero", trailer: "M1bhOaLV4FU", rating: "8.9", release: "2026", studio: "Eric Kripke · Prime", platforms: "Prime Video", languages: "EN · HI · Multi", story: "The final season. Homelander cracks, Butcher bleeds out.", tags: ["Dark Satire", "Superhero", "Final Season"],
+      castLabel: "Cast", cast: [
+        { actor: "Karl Urban", role: "Billy Butcher", img: "/5p1Z0r1aJ1XQbGvXz6Y7bL4Xr0F.jpg" },
+        { actor: "Antony Starr", role: "Homelander", img: "/nT6J5gQ1S3ZQ0W0y7nB6yJ8Q3Yx.jpg" },
+        { actor: "Jack Quaid", role: "Hughie Campbell", img: "/1gP7B8X1QjVhRzQ8zQ6K9y9Y9Qy.jpg" },
+        { actor: "Erin Moriarty", role: "Starlight / Annie", img: "/8z2qV5FvYY8K6yJ6m6Q8Y8y8Y8Y.jpg" },
+        { actor: "Jessie T. Usher", role: "A-Train", img: "/aQh6tJ9KzQ8Qq5Xq8KQ9Y9Y9Y9Y.jpg" },
+        { actor: "Laz Alonso", role: "Mother's Milk", img: "/fQh6tJ9KzQ8Qq5Xq8KQ9Y9Y9Y9Y.jpg" },
+        { actor: "Tomer Capone", role: "Frenchie", img: "/gQh6tJ9KzQ8Qq5Xq8KQ9Y9Y9Y9Y.jpg" },
+        { actor: "Karen Fukuhara", role: "Kimiko", img: "/hQh6tJ9KzQ8Qq5Xq8KQ9Y9Y9Y9Y.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Billy Butcher", role: "The Boys' leader" },
+        { name: "Homelander", role: "Main antagonist" },
+        { name: "Hughie Campbell", role: "The Boys" },
+        { name: "Starlight", role: "The Seven defector" },
+        { name: "A-Train", role: "The Seven" },
+        { name: "Mother's Milk", role: "The Boys" }
+      ]
+    },
+    interstellar: { title: "Interstellar", cat: "Movie · Sci-Fi · Drama", trailer: "zSWdZVtXT7E", rating: "9.5", release: "November 7, 2014", studio: "Christopher Nolan", platforms: "Prime · Netflix", languages: "EN · HI · Multi", story: "Love is the one thing that transcends time and space.", tags: ["Sci-Fi", "Space", "Nolan"],
+      castLabel: "Cast", cast: [
+        { actor: "Matthew McConaughey", role: "Cooper", img: "/wJiGedOCZhwMx9DezY8uwbOme1i.jpg" },
+        { actor: "Anne Hathaway", role: "Dr. Amelia Brand", img: "/s6tflSD20MGz04ZR2R1lZ1epTSB.jpg" },
+        { actor: "Jessica Chastain", role: "Murph (adult)", img: "/lodMzNTbqJ2WepEjGCGro0nU9r5.jpg" },
+        { actor: "Michael Caine", role: "Professor Brand", img: "/bVZRMlpjHhqB0r7fJc1lr6tNQrC.jpg" },
+        { actor: "Matt Damon", role: "Dr. Mann", img: "/At3JgvaNeEN4Z4ESKlhhes85Xo3.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Cooper", role: "Protagonist — ex-pilot" },
+        { name: "Dr. Amelia Brand", role: "Scientist" },
+        { name: "Murph", role: "Cooper's daughter" },
+        { name: "Professor Brand", role: "NASA lead" },
+        { name: "Dr. Mann", role: "Antagonist" }
+      ]
+    },
+    inception: { title: "Inception", cat: "Movie · Sci-Fi · Thriller", trailer: "YoHD9XEInc0", rating: "9.3", release: "July 16, 2010", studio: "Christopher Nolan", platforms: "Netflix", languages: "EN · HI · Multi", story: "A dream within a dream within a dream.", tags: ["Heist", "Dreams", "Nolan"],
+      castLabel: "Cast", cast: [
+        { actor: "Leonardo DiCaprio", role: "Dom Cobb", img: "/wo2hJpn04vbtmh0B9CeD28GdTNL.jpg" },
+        { actor: "Joseph Gordon-Levitt", role: "Arthur", img: "/5yZ3J3Yx5pXhBzJ1D4J4K4y5cA0.jpg" },
+        { actor: "Elliot Page", role: "Ariadne", img: "/zP7G5sQx8Fz1v8y6K9J5h7Z8x0Z.jpg" },
+        { actor: "Tom Hardy", role: "Eames", img: "/sGQRq7QO9TQ0z3Qm8z2t1J9y7x5.jpg" },
+        { actor: "Ken Watanabe", role: "Saito", img: "/kN1lL8qXK5Mx7XqJ4yL3V1q4R9y.jpg" },
+        { actor: "Marion Cotillard", role: "Mal", img: "/3J1Yh2wZ5D1QbK5L7N3X5D9R7S3.jpg" },
+        { actor: "Cillian Murphy", role: "Robert Fischer", img: "/llkbyWKwpfowZ6C8peBjIV9jj99.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Dom Cobb", role: "Extractor" },
+        { name: "Arthur", role: "Point man" },
+        { name: "Ariadne", role: "Architect" },
+        { name: "Eames", role: "Forger" },
+        { name: "Mal", role: "Cobb's projection" }
+      ]
+    },
+    darkknight: { title: "The Dark Knight", cat: "Movie · Superhero · Crime", trailer: "EXeTwQWrcwY", rating: "9.7", release: "July 18, 2008", studio: "Christopher Nolan", platforms: "Netflix", languages: "EN · HI · Multi", story: "Why so serious?", tags: ["Batman", "Superhero", "Legendary"],
+      castLabel: "Cast", cast: [
+        { actor: "Christian Bale", role: "Bruce Wayne / Batman", img: "/8P3W5j8pxtY7xkQ4H3Z7dY3v8Yw.jpg" },
+        { actor: "Heath Ledger", role: "The Joker", img: "/5Y9HnYYa9nR2HVqNxjWYfkPmFQ5.jpg" },
+        { actor: "Aaron Eckhart", role: "Harvey Dent", img: "/aQ2b0ZmD5z0zFqXgC2yYqYx5w2F.jpg" },
+        { actor: "Maggie Gyllenhaal", role: "Rachel Dawes", img: "/q5H7z8YxZ9c1z1Y9x8z7w6v5u4t.jpg" },
+        { actor: "Gary Oldman", role: "James Gordon", img: "/2Q9Y7Jq8zQ8xQ5Vz1w3w4Y8Y9y2.jpg" },
+        { actor: "Michael Caine", role: "Alfred", img: "/bVZRMlpjHhqB0r7fJc1lr6tNQrC.jpg" },
+        { actor: "Morgan Freeman", role: "Lucius Fox", img: "/oIciMZqfQ5B6rqL9Q5v3sN6xN0j.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Batman / Bruce Wayne", role: "Protagonist" },
+        { name: "The Joker", role: "Main antagonist" },
+        { name: "Harvey Dent", role: "Two-Face" },
+        { name: "Rachel Dawes", role: "Love interest" },
+        { name: "James Gordon", role: "Police lieutenant" }
+      ]
+    },
+    rrr: { title: "RRR", cat: "Movie · Telugu · Epic", trailer: "f_vbAtFSEc0", rating: "8.8", release: "March 25, 2022", studio: "SS Rajamouli", platforms: "Netflix", languages: "TE · HI · Multi", story: "Two revolutionaries, one empire.", tags: ["Indian", "Epic", "Action"],
+      castLabel: "Cast", cast: [
+        { actor: "N. T. Rama Rao Jr.", role: "Komaram Bheem", img: null },
+        { actor: "Ram Charan", role: "Alluri Sitarama Raju", img: null },
+        { actor: "Alia Bhatt", role: "Sita", img: "/8E1q7TzQ0yT2aF3bB9xQ4W3pF1k.jpg" },
+        { actor: "Ajay Devgn", role: "Venkata Rama Raju", img: null },
+        { actor: "Olivia Morris", role: "Jennifer", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Komaram Bheem", role: "Protagonist — Gond tribal" },
+        { name: "Alluri Sitarama Raju", role: "Protagonist — police officer" },
+        { name: "Sita", role: "Raju's love interest" }
+      ]
+    },
+    spiderverse: { title: "Spider-Man: Across the Spider-Verse", cat: "Movie · Animation", trailer: "cqGjhVJWtEg", rating: "9.4", release: "June 2, 2023", studio: "Sony Animation", platforms: "Netflix", languages: "EN · HI · Multi", story: "Every frame a painting.", tags: ["Animation", "Spider-Verse", "Masterpiece"],
+      castLabel: "Cast", cast: [
+        { actor: "Shameik Moore", role: "Miles Morales", img: "/2nyvB1z6Q0q5VJ5FjS3V1c2W1q0.jpg" },
+        { actor: "Hailee Steinfeld", role: "Gwen Stacy", img: "/dzq1z8KxQ4d0z7xJ4w2V5c1W3z0.jpg" },
+        { actor: "Oscar Isaac", role: "Miguel O'Hara", img: "/zQ2r6eH2B2l3kQ3q3J1q6F4y7V6.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Miles Morales", role: "Spider-Man" },
+        { name: "Gwen Stacy", role: "Spider-Gwen" },
+        { name: "Miguel O'Hara", role: "Spider-Man 2099" },
+        { name: "The Spot", role: "Antagonist" }
+      ]
+    },
+    johnwick: { title: "John Wick: Chapter 4", cat: "Movie · Action", trailer: "qEVUtrk8_B4", rating: "8.9", release: "March 24, 2023", studio: "Lionsgate", platforms: "Prime", languages: "EN · HI · Multi", story: "The Baba Yaga goes global.", tags: ["Action", "Wick", "Gun-fu"],
+      castLabel: "Cast", cast: [
+        { actor: "Keanu Reeves", role: "John Wick", img: "/4D0PpNI0kmP58hgrwGC3a6Z5F1h.jpg" },
+        { actor: "Donnie Yen", role: "Caine", img: "/hTlhrrZMgSYAC0MMHHxjB4W9Vb7.jpg" },
+        { actor: "Bill Skarsgård", role: "Marquis de Gramont", img: "/6XQ5w3wqE4XqY5w3wqY5w3wqY5w.jpg" },
+        { actor: "Ian McShane", role: "Winston", img: "/x1W5X1q3Q5XqY5w3wqY5w3wqY5w.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "John Wick", role: "Protagonist" },
+        { name: "Caine", role: "Blind assassin" },
+        { name: "Marquis de Gramont", role: "Antagonist" },
+        { name: "Winston", role: "Continental manager" }
+      ]
+    },
+    madmax: { title: "Mad Max: Fury Road", cat: "Movie · Action", trailer: "hEJnMQG9ev8", rating: "9.0", release: "May 15, 2015", studio: "George Miller", platforms: "Netflix", languages: "EN · HI · Multi", story: "Witness me.", tags: ["Action", "Post-apocalyptic", "Cinema"],
+      castLabel: "Cast", cast: [
+        { actor: "Tom Hardy", role: "Max Rockatansky", img: "/sGQRq7QO9TQ0z3Qm8z2t1J9y7x5.jpg" },
+        { actor: "Charlize Theron", role: "Imperator Furiosa", img: "/1FZ2Q0d1qX5uQ5x3wqY5w3wqY5w.jpg" },
+        { actor: "Nicholas Hoult", role: "Nux", img: "/pQ3b5r7T5x9wQ8q7Y6u5T4r3E2w.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Max Rockatansky", role: "Protagonist" },
+        { name: "Furiosa", role: "Deuteragonist" },
+        { name: "Immortan Joe", role: "Antagonist" }
+      ]
+    },
+    pathaan: { title: "Pathaan", cat: "Movie · Hindi · Spy", trailer: "vqu4z34wENw", rating: "8.2", release: "January 25, 2023", studio: "YRF", platforms: "Prime", languages: "HI · EN · Multi", story: "SRK returns.", tags: ["Hindi", "Spy", "SRK"],
+      castLabel: "Cast", cast: [
+        { actor: "Shah Rukh Khan", role: "Pathaan", img: "/8Uit3Kt7VgnU2nL0mT5ADlH2B8v.jpg" },
+        { actor: "Deepika Padukone", role: "Rubina Mohsin", img: "/sJ7MNxMgSK8jTQ5cMcmXCfqrqvO.jpg" },
+        { actor: "John Abraham", role: "Jim", img: "/1Y5q0t9wY5w3wqY5w3wqY5w3wqY5.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Pathaan", role: "RAW agent" },
+        { name: "Rubina", role: "ISI agent" },
+        { name: "Jim", role: "Antagonist" }
+      ]
+    },
+
+    demonslayer: { title: "Demon Slayer: Infinity Castle", cat: "Anime · Action · Dark Fantasy", trailer: "WiiWYl2tUC0", rating: "9.5", release: "September 12, 2025", studio: "Ufotable", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "The final arc reaches the screen.", tags: ["Anime", "Action", "Ufotable"],
+      castLabel: "Voice Cast (JP / EN)",
+      cast: [
+        { actor: "Natsuki Hanae", role: "Tanjiro Kamado (JP)", img: "/xQ5r6eH2B2l3kQ3q3J1q6F4y7V6.jpg" },
+        { actor: "Zach Aguilar", role: "Tanjiro Kamado (EN)", img: null },
+        { actor: "Akari Kitō", role: "Nezuko Kamado (JP)", img: null },
+        { actor: "Abby Trott", role: "Nezuko Kamado (EN)", img: null },
+        { actor: "Yoshitsugu Matsuoka", role: "Inosuke Hashibira (JP)", img: null },
+        { actor: "Bryce Papenbrook", role: "Inosuke Hashibira (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Tanjiro Kamado", role: "Protagonist" },
+        { name: "Nezuko Kamado", role: "Demon sister" },
+        { name: "Zenitsu Agatsuma", role: "Thunder Breath" },
+        { name: "Inosuke Hashibira", role: "Beast Breath" },
+        { name: "Muzan Kibutsuji", role: "Main antagonist" }
+      ]
+    },
+    jjk: { title: "Jujutsu Kaisen: Culling Game", cat: "Anime · Dark Fantasy", trailer: "g0SLmWJtxUw", rating: "9.4", release: "2026", studio: "MAPPA", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "The colonies open. Sukuna walks.", tags: ["Anime", "Dark Fantasy", "MAPPA"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Junya Enoki", role: "Yuji Itadori (JP)", img: null },
+        { actor: "Adam McArthur", role: "Yuji Itadori (EN)", img: null },
+        { actor: "Junichi Suwabe", role: "Sukuna (JP)", img: null },
+        { actor: "Ray Chase", role: "Sukuna (EN)", img: null },
+        { actor: "Yūichi Nakamura", role: "Satoru Gojo (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Yuji Itadori", role: "Protagonist" },
+        { name: "Sukuna", role: "King of Curses" },
+        { name: "Megumi Fushiguro", role: "Ten Shadows" },
+        { name: "Nobara Kugisaki", role: "Straw Doll technique" },
+        { name: "Satoru Gojo", role: "Six Eyes" }
+      ]
+    },
+    onepiece: { title: "One Piece: Elbaph Arc", cat: "Anime · Adventure", trailer: "MCb13lbVGE0", rating: "9.3", release: "2026", studio: "Toei Animation", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "The giants' island. The last Poneglyph.", tags: ["Anime", "Adventure", "Shonen"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Mayumi Tanaka", role: "Monkey D. Luffy (JP)", img: null },
+        { actor: "Colleen Clinkenbeard", role: "Monkey D. Luffy (EN)", img: null },
+        { actor: "Kazuya Nakai", role: "Roronoa Zoro (JP)", img: null },
+        { actor: "Christopher Sabat", role: "Roronoa Zoro (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Monkey D. Luffy", role: "Captain" },
+        { name: "Roronoa Zoro", role: "Swordsman" },
+        { name: "Nami", role: "Navigator" },
+        { name: "Sanji", role: "Cook" },
+        { name: "Nico Robin", role: "Archaeologist" }
+      ]
+    },
+    edgerunners: { title: "Cyberpunk: Edgerunners S2", cat: "Anime · Cyberpunk", trailer: "JtqIas3bYhg", rating: "9.0", release: "2026", studio: "Studio Trigger", platforms: "Netflix", languages: "JP · EN · Multi", story: "A new crew, a new year, the same Night City.", tags: ["Anime", "Cyberpunk", "Trigger"],
+      castLabel: "Voice Cast", cast: [
+        { actor: "KENN", role: "David Martinez (JP)", img: null },
+        { actor: "Zach Aguilar", role: "David Martinez (EN)", img: null },
+        { actor: "Aoi Yūki", role: "Lucy (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "David Martinez", role: "Protagonist (S1)" },
+        { name: "Lucy", role: "Netrunner" },
+        { name: "Maine", role: "Crew leader" },
+        { name: "Rebecca", role: "Gun specialist" }
+      ]
+    },
+    aot: { title: "Attack on Titan: Requiem", cat: "Anime · Epic", trailer: "SlNpRThS9t8", rating: "9.6", release: "2025", studio: "MAPPA", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "What if the Rumbling stopped?", tags: ["Anime", "Epic", "Titans"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Yūki Kaji", role: "Eren Yeager (JP)", img: null },
+        { actor: "Bryce Papenbrook", role: "Eren Yeager (EN)", img: null },
+        { actor: "Yui Ishikawa", role: "Mikasa Ackerman (JP)", img: null },
+        { actor: "Ashly Burch", role: "Mikasa Ackerman (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Eren Yeager", role: "Protagonist — Attack Titan" },
+        { name: "Mikasa Ackerman", role: "Deuteragonist" },
+        { name: "Armin Arlert", role: "Colossal Titan" },
+        { name: "Levi Ackerman", role: "Captain" },
+        { name: "Reiner Braun", role: "Armored Titan" }
+      ]
+    },
+    sololeveling: { title: "Solo Leveling: Arise", cat: "Anime · Action", trailer: "1ZKUH1ntm3g", rating: "8.8", release: "2026", studio: "A-1 Pictures", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Jinwoo's shadow army grows.", tags: ["Anime", "Action", "Level Up"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Taito Ban", role: "Sung Jinwoo (JP)", img: null },
+        { actor: "Aleks Le", role: "Sung Jinwoo (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Sung Jinwoo", role: "Protagonist — Shadow Monarch" },
+        { name: "Cha Hae-In", role: "S-Rank hunter" },
+        { name: "Yoo Jinho", role: "Ally / guildmate" }
+      ]
+    },
+    naruto: { title: "Naruto Shippuden", cat: "Anime · Action · Adventure", trailer: "QczGoCmX-pI", rating: "9.2", release: "February 15, 2007", studio: "Studio Pierrot", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Believe it.", tags: ["Naruto", "Shonen", "Classic"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Junko Takeuchi", role: "Naruto Uzumaki (JP)", img: null },
+        { actor: "Maile Flanagan", role: "Naruto Uzumaki (EN)", img: null },
+        { actor: "Noriaki Sugiyama", role: "Sasuke Uchiha (JP)", img: null },
+        { actor: "Yuri Lowenthal", role: "Sasuke Uchiha (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Naruto Uzumaki", role: "Protagonist" },
+        { name: "Sasuke Uchiha", role: "Rival" },
+        { name: "Sakura Haruno", role: "Teammate" },
+        { name: "Kakashi Hatake", role: "Sensei" }
+      ]
+    },
+    "bleach-tybw": { title: "Bleach: Thousand-Year Blood War", cat: "Anime · Shonen · Action", trailer: "B1FpJn6gU2o", rating: "9.3", release: "October 10, 2022", studio: "Studio Pierrot", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Ichigo vs Yhwach.", tags: ["Bleach", "Shonen", "Ichigo"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Masakazu Morita", role: "Ichigo Kurosaki (JP)", img: null },
+        { actor: "Johnny Yong Bosch", role: "Ichigo Kurosaki (EN)", img: null },
+        { actor: "Takayuki Sugō", role: "Yhwach (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Ichigo Kurosaki", role: "Substitute Soul Reaper" },
+        { name: "Yhwach", role: "Main antagonist" },
+        { name: "Rukia Kuchiki", role: "Soul Reaper" }
+      ]
+    },
+    chainsaw: { title: "Chainsaw Man", cat: "Anime · Dark Fantasy", trailer: "dFlDRhvM4L0", rating: "9.1", release: "October 11, 2022", studio: "MAPPA", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Denji wanted a girlfriend. He got a chainsaw for a head.", tags: ["Chainsaw", "Dark", "MAPPA"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Kikunosuke Toya", role: "Denji (JP)", img: null },
+        { actor: "Ryan Colt Levy", role: "Denji (EN)", img: null },
+        { actor: "Tomori Kusunoki", role: "Makima (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Denji", role: "Protagonist — Chainsaw Devil" },
+        { name: "Makima", role: "Control Devil" },
+        { name: "Power", role: "Blood Fiend" },
+        { name: "Aki Hayakawa", role: "Public Safety" }
+      ]
+    },
+    myhero: { title: "My Hero Academia", cat: "Anime · Superhero", trailer: "EPNqjmXcHqg", rating: "9.0", release: "April 3, 2016", studio: "Bones", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Plus Ultra.", tags: ["MHA", "Shonen", "Heroes"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Daiki Yamashita", role: "Izuku Midoriya (JP)", img: null },
+        { actor: "Justin Briner", role: "Izuku Midoriya (EN)", img: null },
+        { actor: "Kenta Miyake", role: "All Might (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Izuku Midoriya", role: "Protagonist" },
+        { name: "All Might", role: "Symbol of Peace" },
+        { name: "Katsuki Bakugo", role: "Rival" },
+        { name: "Tomura Shigaraki", role: "Main antagonist" }
+      ]
+    },
+    spyfamily: { title: "Spy × Family", cat: "Anime · Comedy · Action", trailer: "ofXigq9aIpo", rating: "9.2", release: "April 9, 2022", studio: "Wit · CloverWorks", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "A spy, an assassin, and a telepath walk into a family.", tags: ["Comedy", "Spy", "Anya"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Takuya Eguchi", role: "Loid Forger (JP)", img: null },
+        { actor: "Alex Organ", role: "Loid Forger (EN)", img: null },
+        { actor: "Atsumi Tanezaki", role: "Anya Forger (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Loid Forger", role: "Spy — Twilight" },
+        { name: "Yor Forger", role: "Assassin" },
+        { name: "Anya Forger", role: "Telepath daughter" }
+      ]
+    },
+    vinlandsaga: { title: "Vinland Saga", cat: "Anime · Historical", trailer: "f8Jr0CDUZcM", rating: "9.4", release: "July 7, 2019", studio: "Wit · MAPPA", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Thorfinn has no enemies.", tags: ["Viking", "Historical", "Peace"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Yūto Uemura", role: "Thorfinn (JP)", img: null },
+        { actor: "Mike Haimoto", role: "Thorfinn (EN)", img: null },
+        { actor: "Kenichirō Matsuda", role: "Askeladd (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Thorfinn", role: "Protagonist" },
+        { name: "Askeladd", role: "Antagonist / mentor" },
+        { name: "Canute", role: "Prince of Denmark" }
+      ]
+    },
+    deathnote: { title: "Death Note", cat: "Anime · Thriller", trailer: "NlJZ-YgAt-c", rating: "9.5", release: "October 4, 2006", studio: "Madhouse", platforms: "Netflix", languages: "JP · EN · HI", story: "A notebook. A god complex.", tags: ["Thriller", "Classic", "Light"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Mamoru Miyano", role: "Light Yagami (JP)", img: null },
+        { actor: "Brad Swaile", role: "Light Yagami (EN)", img: null },
+        { actor: "Kappei Yamaguchi", role: "L (JP)", img: null },
+        { actor: "Alessandro Juliani", role: "L (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Light Yagami", role: "Protagonist — Kira" },
+        { name: "L", role: "Detective" },
+        { name: "Ryuk", role: "Shinigami" },
+        { name: "Misa Amane", role: "Second Kira" }
+      ]
+    },
+    fullmetal: { title: "Fullmetal Alchemist: Brotherhood", cat: "Anime · Adventure", trailer: "f2tHzU-YvPc", rating: "9.7", release: "April 5, 2009", studio: "Bones", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Equivalent exchange.", tags: ["FMA", "Classic", "Peak"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Romi Park", role: "Edward Elric (JP)", img: null },
+        { actor: "Vic Mignogna", role: "Edward Elric (EN)", img: null },
+        { actor: "Rie Kugimiya", role: "Alphonse Elric (JP)", img: null }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Edward Elric", role: "Fullmetal Alchemist" },
+        { name: "Alphonse Elric", role: "Armored brother" },
+        { name: "Winry Rockbell", role: "Mechanic" },
+        { name: "Roy Mustang", role: "Flame Alchemist" }
+      ]
+    },
+
+    "sports-hub": { title: "Sukuna Sports Hub", cat: "Live · Sports · 24/7", trailer: "sX0lS2BdThM", rating: "9.4", release: "Live · 24/7", studio: "Sukuna Sports", platforms: "Global", languages: "EN · HI · Multi", story: "Every match that matters, every night.", tags: ["Live", "Sports", "Global"],
+      castLabel: "Leagues", cast: [{ actor: "UEFA", role: "Football", img: null }, { actor: "IPL", role: "Cricket", img: null }, { actor: "NBA", role: "Basketball", img: null }],
+      charsLabel: "Sports", chars: [{ name: "Football", role: "Global" }, { name: "Cricket", role: "Global" }, { name: "Basketball", role: "US" }, { name: "F1", role: "Global" }, { name: "MMA", role: "Global" }]
+    },
+    football: { title: "Champions League", cat: "Sport · Football", trailer: "6V8ZnRF8Lc8", rating: "9.6", release: "Live Now", studio: "UEFA", platforms: "Global", languages: "EN · HI · Multi", story: "Europe's elite.", tags: ["Football", "Live", "UEFA"],
+      castLabel: "Star Players", cast: [{ actor: "Live teams", role: "Rotating", img: null }],
+      charsLabel: "Clubs", chars: [{ name: "Real Madrid", role: "14× winners" }, { name: "Bayern Munich", role: "6× winners" }]
+    },
+    cricket: { title: "IPL 2026", cat: "Sport · Cricket", trailer: "9Z5tCLn9ZsA", rating: "9.4", release: "Live Now", studio: "BCCI", platforms: "Global", languages: "HI · EN", story: "The loudest league on earth.", tags: ["Cricket", "Live", "IPL"],
+      castLabel: "Star Players", cast: [{ actor: "Rotating rosters", role: "IPL squads", img: null }],
+      charsLabel: "Teams", chars: [{ name: "Mumbai Indians", role: "5× champions" }, { name: "Chennai Super Kings", role: "5× champions" }]
+    },
+    basketball: { title: "NBA Playoffs", cat: "Sport · Basketball", trailer: "0Y5Gz2nzH_Y", rating: "9.3", release: "Live Now", studio: "NBA", platforms: "Global", languages: "EN · HI", story: "Best-of-seven.", tags: ["NBA", "Live", "Basketball"],
+      castLabel: "Star Players", cast: [
+        { actor: "LeBron James", role: "Forward", img: null },
+        { actor: "Stephen Curry", role: "Guard", img: null }
+      ],
+      charsLabel: "Teams", chars: [{ name: "Lakers", role: "West" }, { name: "Warriors", role: "West" }, { name: "Celtics", role: "East" }]
+    },
+    f1: { title: "Formula 1 2026", cat: "Sport · Motorsport", trailer: "Mx0D2nZ3Qr8", rating: "9.5", release: "Live Now", studio: "FIA", platforms: "Global", languages: "EN · HI", story: "Twenty-four races.", tags: ["F1", "Live", "Racing"],
+      castLabel: "Drivers", cast: [
+        { actor: "Max Verstappen", role: "Red Bull", img: null },
+        { actor: "Lewis Hamilton", role: "Ferrari", img: null }
+      ],
+      charsLabel: "Teams", chars: [{ name: "Red Bull Racing", role: "Constructor" }, { name: "Ferrari", role: "Constructor" }, { name: "McLaren", role: "Constructor" }]
+    },
+    mma: { title: "UFC Fight Night", cat: "Sport · MMA", trailer: "3z1vZ5K7x8Q", rating: "9.2", release: "Live Now", studio: "UFC", platforms: "Global", languages: "EN · HI", story: "Two fighters, one cage.", tags: ["UFC", "Live", "MMA"],
+      castLabel: "Fighters", cast: [
+        { actor: "Jon Jones", role: "Heavyweight", img: null },
+        { actor: "Islam Makhachev", role: "Lightweight", img: null }
+      ],
+      charsLabel: "Divisions", chars: [{ name: "Heavyweight", role: "265 lb" }, { name: "Lightweight", role: "155 lb" }]
+    },
+    tennis: { title: "Grand Slam Tennis", cat: "Sport · Tennis", trailer: "T5nQzK3X1pY", rating: "9.1", release: "Live Now", studio: "ATP", platforms: "Global", languages: "EN · HI", story: "Centre court. Five sets.", tags: ["Tennis", "Live", "Grand Slam"],
+      castLabel: "Players", cast: [
+        { actor: "Novak Djokovic", role: "Singles", img: null },
+        { actor: "Carlos Alcaraz", role: "Singles", img: null }
+      ],
+      charsLabel: "Tournaments", chars: [{ name: "Wimbledon", role: "Grass" }, { name: "US Open", role: "Hard" }]
+    },
+    epl: { title: "Premier League", cat: "Sport · Football", trailer: "sX0lS2BdThM", rating: "9.5", release: "Live Now", studio: "EPL", platforms: "Global", languages: "EN · HI", story: "38 weeks of the best football on earth.", tags: ["Football", "Live", "EPL"],
+      castLabel: "Star Players", cast: [{ actor: "Rotating rosters", role: "EPL squads", img: null }],
+      charsLabel: "Clubs", chars: [{ name: "Manchester United", role: "13× champions" }, { name: "Liverpool", role: "19× champions" }]
+    },
+    mlb: { title: "MLB World Series", cat: "Sport · Baseball", trailer: "x0vYF5jNh1s", rating: "9.0", release: "Live Now", studio: "MLB", platforms: "Global", languages: "EN · HI", story: "162 games, one trophy.", tags: ["Baseball", "Live", "MLB"],
+      castLabel: "Star Players", cast: [{ actor: "Shohei Ohtani", role: "DH / Pitcher", img: null }],
+      charsLabel: "Teams", chars: [{ name: "Yankees", role: "AL East" }, { name: "Dodgers", role: "NL West" }]
+    },
+    nfl: { title: "NFL Sunday Night", cat: "Sport · American Football", trailer: "Z5tI3_d8DqY", rating: "9.4", release: "Live Now", studio: "NFL", platforms: "Global", languages: "EN · HI", story: "The biggest stage in American sports.", tags: ["NFL", "Live", "Super Bowl"],
+      castLabel: "Star Players", cast: [{ actor: "Patrick Mahomes", role: "QB — Chiefs", img: null }],
+      charsLabel: "Teams", chars: [{ name: "Kansas City Chiefs", role: "AFC West" }, { name: "San Francisco 49ers", role: "NFC West" }]
+    },
+    boxing: { title: "World Heavyweight Title", cat: "Sport · Boxing", trailer: "0yJZjK0Nk98", rating: "9.3", release: "Live Now", studio: "WBC", platforms: "Global", languages: "EN · HI", story: "Twelve rounds. Two men.", tags: ["Boxing", "Live", "Title"],
+      castLabel: "Fighters", cast: [
+        { actor: "Tyson Fury", role: "Heavyweight", img: null },
+        { actor: "Oleksandr Usyk", role: "Heavyweight", img: null }
+      ],
+      charsLabel: "Division", chars: [{ name: "Heavyweight", role: "Unified" }]
+    },
+
+    ai: { title: "The AI Era", cat: "Feature · AI · 2026", trailer: "aircAruvnKk", rating: "9.7", release: "2026", studio: "Sukuna AI Lab", platforms: "All Platforms", languages: "EN · Multi", story: "Machine intelligence is rewriting how games are built, how films are cut, and how stories get told.", tags: ["AI", "Generative", "Future"],
+      castLabel: "Contributors", cast: [{ actor: "Sukuna AI Lab", role: "Research", img: null }],
+      charsLabel: "Topics", chars: [{ name: "Generative Worlds", role: "AI-created games" }, { name: "Real-time Direction", role: "AI-assisted film" }]
+    },
+    masseffect: { title: "Mass Effect 5", cat: "Game · Sci-Fi RPG", trailer: "Lg-C2oq-pg8", rating: "9.5", release: "2027 (TBA)", studio: "BioWare", platforms: "PS5 · Xbox · PC", languages: "EN · HI · Multi", story: "BioWare returns to the galaxy.", tags: ["Sci-Fi", "RPG", "BioWare"],
+      castLabel: "Announced Cast", cast: [{ actor: "Ali Hillis (expected)", role: "Liara T'Soni", img: null }],
+      charsLabel: "Characters", chars: [{ name: "Liara T'Soni", role: "Returning NPC" }, { name: "New protagonist", role: "TBA" }]
+    },
+    wolverine: { title: "Marvel's Wolverine", cat: "Game · Action · Superhero", trailer: "yOSb6vQk7rU", rating: "9.2", release: "Fall 2026", studio: "Insomniac Games", platforms: "PS5", languages: "EN · HI · Multi", story: "Logan's claws come out.", tags: ["Superhero", "Action", "Wolverine"],
+      castLabel: "Announced Cast", cast: [{ actor: "TBA", role: "Logan / Wolverine", img: null }],
+      charsLabel: "Characters", chars: [{ name: "Logan / Wolverine", role: "Protagonist" }]
+    },
+    witcher4: { title: "The Witcher IV", cat: "Game · Dark Fantasy · RPG", trailer: "Cw30pK3h3XU", rating: "9.6", release: "2027 (TBA)", studio: "CD Projekt Red", platforms: "PS5 · PC", languages: "EN · HI · Multi", story: "Ciri takes the Path.", tags: ["Witcher", "RPG", "Ciri"],
+      castLabel: "Announced Cast", cast: [{ actor: "Ciara Berkeley", role: "Ciri", img: null }],
+      charsLabel: "Characters", chars: [{ name: "Ciri", role: "Protagonist" }, { name: "Geralt", role: "Referenced" }]
+    },
+    bleach: { title: "Bleach: TYBW — Final Cour", cat: "Anime · Shonen · Action", trailer: "B1FpJn6gU2o", rating: "9.3", release: "Late 2025", studio: "Studio Pierrot", platforms: "Crunchyroll", languages: "JP · EN · HI", story: "Ichigo vs Yhwach.", tags: ["Anime", "Shonen", "Ichigo"],
+      castLabel: "Voice Cast (JP / EN)", cast: [
+        { actor: "Masakazu Morita", role: "Ichigo Kurosaki (JP)", img: null },
+        { actor: "Johnny Yong Bosch", role: "Ichigo Kurosaki (EN)", img: null }
+      ],
+      charsLabel: "Characters", chars: [{ name: "Ichigo Kurosaki", role: "Protagonist" }, { name: "Yhwach", role: "Antagonist" }]
+    },
+    strangerthings: { title: "Stranger Things — Season 5", cat: "Series · Sci-Fi Horror", trailer: "d0NqBSnR0Dk", rating: "9.1", release: "2025", studio: "Duffer Brothers · Netflix", platforms: "Netflix", languages: "EN · HI · Multi", story: "The final season. Hawkins burns.", tags: ["Sci-Fi", "Horror", "Final Season"],
+      castLabel: "Cast", cast: [
+        { actor: "Millie Bobby Brown", role: "Eleven", img: "/6B7OSpXXO2VXb1uQ2K6Y8b2K0T5.jpg" },
+        { actor: "Finn Wolfhard", role: "Mike Wheeler", img: "/7fW5eXqN6q1kXKqJ8L4s7Y9L4y3.jpg" },
+        { actor: "David Harbour", role: "Jim Hopper", img: "/vX7a9zY1q3Y3KqY5w7wY7wY7wY7.jpg" },
+        { actor: "Winona Ryder", role: "Joyce Byers", img: "/9V9XqZ9Y9qX9Y9qY9wY9wY9wY9.jpg" },
+        { actor: "Gaten Matarazzo", role: "Dustin Henderson", img: "/qX9Y9wY9wY9wY9wY9wY9wY9wY9.jpg" },
+        { actor: "Caleb McLaughlin", role: "Lucas Sinclair", img: "/z9wY9wY9wY9wY9wY9wY9wY9wY9.jpg" },
+        { actor: "Sadie Sink", role: "Max Mayfield", img: "/a9wY9wY9wY9wY9wY9wY9wY9wY9.jpg" }
+      ],
+      charsLabel: "Characters", chars: [
+        { name: "Eleven", role: "Psychic protagonist" },
+        { name: "Mike Wheeler", role: "Party leader" },
+        { name: "Jim Hopper", role: "Police chief" },
+        { name: "Vecna / Henry Creel", role: "Main antagonist" },
+        { name: "Max Mayfield", role: "Party member" }
+      ]
+    }
   };
 
-  /* ============================================
-     YOUTUBE API PLAYER + CUSTOM CONTROLS
-     ============================================ */
+  /* ============ YOUTUBE API PLAYER ============ */
   let ytPlayer = null;
   let ytApiReady = false;
   let currentSpeed = 1.0;
   let currentQuality = 'default';
-  let currentLang = 'en';
   let pendingVideoId = null;
-
   const SPEED_STEPS = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
   window.onYouTubeIframeAPIReady = function () {
     ytApiReady = true;
-    if (pendingVideoId) {
-      createPlayer(pendingVideoId);
-      pendingVideoId = null;
-    }
+    if (pendingVideoId) { createPlayer(pendingVideoId); pendingVideoId = null; }
   };
 
   function createPlayer(videoId) {
-    const container = document.getElementById('ytPlayer');
-    // ensure container is fresh every time
-    if (ytPlayer) {
-      try { ytPlayer.loadVideoById(videoId); return; } catch (e) { ytPlayer = null; }
-    }
+    if (ytPlayer) { try { ytPlayer.loadVideoById(videoId); return; } catch (e) { ytPlayer = null; } }
     ytPlayer = new YT.Player('ytPlayer', {
       videoId: videoId,
-      playerVars: {
-        autoplay: 1,
-        rel: 0,
-        modestbranding: 1,
-        playsinline: 1,
-        cc_load_policy: 0,
-        origin: window.location.origin
-      },
-      events: {
-        onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange
-      }
+      playerVars: { autoplay: 1, rel: 0, modestbranding: 1, playsinline: 1, origin: window.location.origin },
+      events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange }
     });
   }
 
   function onPlayerReady() {
     try { ytPlayer.playVideo(); } catch (e) {}
-    applySpeed(currentSpeed);
-    applyQuality(currentQuality);
-    applyLang(currentLang);
+    applySpeed(currentSpeed); applyQuality(currentQuality);
     updatePlayPauseBtn(true);
   }
 
   function onPlayerStateChange(e) {
-    if (e.data === 1) updatePlayPauseBtn(true);         // PLAYING
-    else if (e.data === 2) updatePlayPauseBtn(false);   // PAUSED
-    else if (e.data === 0) updatePlayPauseBtn(false);   // ENDED
+    if (e.data === 1) updatePlayPauseBtn(true);
+    else if (e.data === 2 || e.data === 0) updatePlayPauseBtn(false);
   }
 
   function updatePlayPauseBtn(isPlaying) {
@@ -1678,16 +3146,12 @@
     btn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
   }
 
-  /* --- SPEED --- */
   function applySpeed(rate) {
     if (!ytPlayer || !ytPlayer.setPlaybackRate) return;
     try { ytPlayer.setPlaybackRate(rate); } catch (e) {}
-    const valEl = document.getElementById('pcSpeedVal');
-    if (valEl) valEl.textContent = rate.toFixed(2) + '×';
-    const down = document.getElementById('pcSpeedDown');
-    const up = document.getElementById('pcSpeedUp');
-    if (down) down.disabled = rate <= SPEED_STEPS[0];
-    if (up) up.disabled = rate >= SPEED_STEPS[SPEED_STEPS.length - 1];
+    document.getElementById('pcSpeedVal').textContent = rate.toFixed(2) + '×';
+    document.getElementById('pcSpeedDown').disabled = rate <= SPEED_STEPS[0];
+    document.getElementById('pcSpeedUp').disabled = rate >= SPEED_STEPS[SPEED_STEPS.length - 1];
   }
 
   function stepSpeed(dir) {
@@ -1695,35 +3159,12 @@
     let next = idx;
     if (dir > 0 && idx < SPEED_STEPS.length - 1) next = idx + 1;
     if (dir < 0 && idx > 0) next = idx - 1;
-    if (next !== idx) {
-      currentSpeed = SPEED_STEPS[next];
-      applySpeed(currentSpeed);
-    }
+    if (next !== idx) { currentSpeed = SPEED_STEPS[next]; applySpeed(currentSpeed); }
   }
 
-  /* --- QUALITY --- */
   function applyQuality(q) {
     if (!ytPlayer || !ytPlayer.setPlaybackQuality) return;
     try { ytPlayer.setPlaybackQuality(q); } catch (e) {}
-  }
-
-  /* --- LANGUAGE / CAPTIONS --- */
-  function applyLang(lang) {
-    if (!ytPlayer || !ytPlayer.setOption) return;
-    try {
-      if (lang === 'off') {
-        ytPlayer.unloadModule('captions');
-        return;
-      }
-      ytPlayer.loadModule('captions');
-      if (lang === 'multi') {
-        // "multi" = let youtube auto-pick based on the user's locale
-        // we keep the current track; just ensure captions module is loaded
-        ytPlayer.setOption('captions', 'track', {});
-      } else {
-        ytPlayer.setOption('captions', 'track', { languageCode: lang });
-      }
-    } catch (e) {}
   }
 
   /* ============ MODAL ============ */
@@ -1734,11 +3175,22 @@
   const modalStory = document.getElementById('modalStory');
   const modalTags = document.getElementById('modalTags');
   const modalWatch = document.getElementById('modalWatch');
+  const pcDirect = document.getElementById('pcDirect');
+  const modalCast = document.getElementById('modalCast');
+  const modalChars = document.getElementById('modalChars');
+  const castLabelText = document.getElementById('castLabelText');
+  const charsLabelText = document.getElementById('charsLabelText');
+
+  function initials(name) {
+    if (!name) return '?';
+    const parts = name.replace(/[^\w\s\.]/g, '').trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
 
   function openModal(key) {
     const item = LIBRARY[key];
     if (!item) return;
-
     modalCat.textContent = item.cat;
     modalTitle.textContent = item.title;
     modalMeta.innerHTML = `
@@ -1750,21 +3202,48 @@
     `;
     modalStory.textContent = item.story;
     modalTags.innerHTML = item.tags.map(t => `<span class="tg">${t}</span>`).join('');
-    modalWatch.onclick = () => window.open(`https://www.youtube.com/watch?v=${item.trailer}`, '_blank');
 
-    // reset controls state for fresh open
-    currentSpeed = 1.0;
-    currentQuality = 'default';
-    currentLang = 'en';
+    castLabelText.textContent = item.castLabel || 'Cast';
+    charsLabelText.textContent = item.charsLabel || 'Characters';
+
+    if (item.cast && item.cast.length) {
+      modalCast.innerHTML = item.cast.map(c => {
+        const ini = initials(c.actor);
+        const photoSrc = c.img ? `https://image.tmdb.org/t/p/w185${c.img}` : null;
+        const faceHTML = photoSrc
+          ? `<div class="ci-face"><div class="ci-initials">${ini}</div><img src="${photoSrc}" alt="${c.actor}" loading="lazy" onerror="this.remove()"></div>`
+          : `<div class="ci-face"><div class="ci-initials">${ini}</div></div>`;
+        return `
+          <div class="cast-item">
+            ${faceHTML}
+            <div class="ci-info">
+              <div class="ci-actor">${c.actor}</div>
+              <div class="ci-role">${c.role}</div>
+            </div>
+          </div>`;
+      }).join('');
+    } else {
+      modalCast.innerHTML = `<div class="cast-item"><div class="ci-info"><div class="ci-role">Cast information not available</div></div></div>`;
+    }
+
+    if (item.chars && item.chars.length) {
+      modalChars.innerHTML = item.chars.map(c => `<span class="char-chip"><span class="cn">${c.name}</span> <span class="ca">· ${c.role}</span></span>`).join('');
+    } else {
+      modalChars.innerHTML = `<span class="char-chip"><span class="ca">Character information not available</span></span>`;
+    }
+
+    const ytUrl = `https://www.youtube.com/watch?v=${item.trailer}`;
+    modalWatch.href = ytUrl;
+    pcDirect.href = ytUrl;
+
+    currentSpeed = 1.0; currentQuality = 'default';
     document.getElementById('pcQuality').value = 'default';
-    document.getElementById('pcLang').value = 'en';
     applySpeedUIOnly(1.0);
 
     if (ytApiReady && typeof YT !== 'undefined' && YT.Player) {
       createPlayer(item.trailer);
     } else {
       pendingVideoId = item.trailer;
-      // fallback if the API never loads within 3s — inject a plain iframe
       setTimeout(() => {
         if (!ytApiReady) {
           const c = document.getElementById('ytPlayer');
@@ -1774,14 +3253,12 @@
         }
       }, 3000);
     }
-
     backdrop.classList.add('open');
     document.body.classList.add('modal-open');
   }
 
   function applySpeedUIOnly(rate) {
-    const valEl = document.getElementById('pcSpeedVal');
-    if (valEl) valEl.textContent = rate.toFixed(2) + '×';
+    document.getElementById('pcSpeedVal').textContent = rate.toFixed(2) + '×';
     document.getElementById('pcSpeedDown').disabled = rate <= 0.25;
     document.getElementById('pcSpeedUp').disabled = rate >= 2;
   }
@@ -1789,20 +3266,14 @@
   function closeModal() {
     backdrop.classList.remove('open');
     document.body.classList.remove('modal-open');
-    if (ytPlayer && ytPlayer.pauseVideo) {
-      try { ytPlayer.pauseVideo(); } catch (e) {}
-    }
+    if (ytPlayer && ytPlayer.pauseVideo) { try { ytPlayer.pauseVideo(); } catch (e) {} }
   }
 
-  /* control bindings */
   document.getElementById('pcPlayPause').addEventListener('click', () => {
     if (!ytPlayer) return;
     try {
-      if (ytPlayer.getPlayerState && ytPlayer.getPlayerState() === 1) {
-        ytPlayer.pauseVideo();
-      } else {
-        ytPlayer.playVideo();
-      }
+      if (ytPlayer.getPlayerState && ytPlayer.getPlayerState() === 1) ytPlayer.pauseVideo();
+      else ytPlayer.playVideo();
     } catch (e) {}
   });
 
@@ -1814,13 +3285,17 @@
     applyQuality(currentQuality);
   });
 
-  document.getElementById('pcLang').addEventListener('change', (e) => {
-    currentLang = e.target.value;
-    applyLang(currentLang);
-  });
-
-  /* open triggers */
   document.addEventListener('click', (e) => {
+    const expandBtn = e.target.closest('[data-expand]');
+    if (expandBtn) {
+      const grid = document.getElementById(expandBtn.dataset.expand);
+      if (grid) {
+        grid.classList.toggle('open');
+        expandBtn.textContent = grid.classList.contains('open') ? 'View Less −' : 'View All +';
+      }
+      e.preventDefault();
+      return;
+    }
     const trigger = e.target.closest('[data-open]');
     if (trigger && !e.target.closest('.modal')) {
       e.preventDefault();
@@ -1835,7 +3310,7 @@
     if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
   });
 
-  /* ============ SCROLL OPACITY ============ */
+  /* ============ SCROLL ============ */
   const progress = document.getElementById('progress');
   const nav = document.getElementById('nav');
   const cursor = document.getElementById('cursor');
@@ -1863,19 +3338,16 @@
   window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
   onScroll();
 
-  /* SECTION HEAD */
   const headIO = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); headIO.unobserve(e.target); } });
   }, { threshold: 0.4 });
   document.querySelectorAll('.section-head').forEach(h => headIO.observe(h));
 
-  /* CARD REVEAL */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal'); io.unobserve(e.target); } });
   }, { threshold: 0.10, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.card').forEach(c => io.observe(c));
 
-  /* RAIL */
   document.querySelectorAll('.rail-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const rail = document.getElementById(btn.dataset.rail);
@@ -1886,18 +3358,9 @@
   /* SPOTLIGHT */
   const track = document.getElementById('spotlightTrack');
   const slides = track.querySelectorAll('.slide');
-  const navContainer = document.getElementById('slideNav');
   const progressBar = document.getElementById('slideProgress');
   const SLIDE_DURATION = 6500;
   let currentSlide = 0, slideInterval, progressTicker, slideStart = 0;
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goToSlide(i));
-    navContainer.appendChild(dot);
-  });
-  const dots = navContainer.querySelectorAll('.slide-dot');
 
   function startProgress() {
     slideStart = performance.now();
@@ -1913,11 +3376,9 @@
 
   function goToSlide(i) {
     slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
     currentSlide = (i + slides.length) % slides.length;
     track.style.transform = `translateX(-${currentSlide * 100}%)`;
     slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
     resetAuto();
   }
   const nextSlide = () => goToSlide(currentSlide + 1);
@@ -1953,17 +3414,15 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* CURSOR */
   document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
   });
-  document.querySelectorAll('a, .card, .nav-cta, .arrow, .rail-btn, .slide-dot, .modal-close, .cta, .btn, .pc-play, .pc-select, .pc-speed button').forEach(el => {
+  document.querySelectorAll('a, .card, .nav-cta, .arrow, .rail-btn, .modal-close, .cta, .btn, .pc-play, .pc-select, .pc-speed button, .pc-direct, .view-all').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
 
-  /* SMOOTH ANCHORS */
   document.querySelectorAll('nav a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
